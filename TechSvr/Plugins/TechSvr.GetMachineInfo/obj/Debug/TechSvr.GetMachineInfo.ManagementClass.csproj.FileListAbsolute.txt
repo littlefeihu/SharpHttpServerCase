@@ -1,0 +1,8 @@
+D:\Learning\TechSvr\TechSvr.GetMachineInfo.ManagementClass\bin\Debug\TechSvr.GetMachineInfo.ManagementClass.dll
+D:\Learning\TechSvr\TechSvr.GetMachineInfo.ManagementClass\bin\Debug\TechSvr.GetMachineInfo.ManagementClass.pdb
+D:\Learning\TechSvr\TechSvr.GetMachineInfo.ManagementClass\bin\Debug\TechSvr.Utils.dll
+D:\Learning\TechSvr\TechSvr.GetMachineInfo.ManagementClass\bin\Debug\TechSvr.Utils.pdb
+D:\Learning\TechSvr\TechSvr.GetMachineInfo.ManagementClass\obj\Debug\TechSvr.GetMachineInfo.ManagementClass.csprojResolveAssemblyReference.cache
+D:\Learning\TechSvr\TechSvr.GetMachineInfo.ManagementClass\obj\Debug\TechSvr.GetMachineInfo.ManagementClass.csproj.CoreCompileInputs.cache
+D:\Learning\TechSvr\TechSvr.GetMachineInfo.ManagementClass\obj\Debug\TechSvr.GetMachineInfo.ManagementClass.dll
+D:\Learning\TechSvr\TechSvr.GetMachineInfo.ManagementClass\obj\Debug\TechSvr.GetMachineInfo.ManagementClass.pdb

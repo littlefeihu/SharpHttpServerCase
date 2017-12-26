@@ -1,0 +1,8 @@
+D:\Work\TechSvr\TechSvr.Router\bin\Debug\TechSvr.Router.dll
+D:\Work\TechSvr\TechSvr.Router\bin\Debug\TechSvr.Router.pdb
+D:\Work\TechSvr\TechSvr.Router\bin\Debug\TechSvr.Utils.dll
+D:\Work\TechSvr\TechSvr.Router\bin\Debug\TechSvr.Utils.pdb
+D:\Work\TechSvr\TechSvr.Router\obj\Debug\TechSvr.Router.csprojResolveAssemblyReference.cache
+D:\Work\TechSvr\TechSvr.Router\obj\Debug\TechSvr.Router.csproj.CoreCompileInputs.cache
+D:\Work\TechSvr\TechSvr.Router\obj\Debug\TechSvr.Router.dll
+D:\Work\TechSvr\TechSvr.Router\obj\Debug\TechSvr.Router.pdb

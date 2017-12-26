@@ -1,0 +1,13 @@
+D:\Learning\bin\debug\Plugins\TechSvr.ReadCard.dll
+D:\Learning\bin\debug\Plugins\TechSvr.ReadCard.pdb
+D:\Learning\TechSvr\TechSvr.ReadCard\obj\Debug\TechSvr.ReadCard.csproj.CoreCompileInputs.cache
+D:\Learning\TechSvr\TechSvr.ReadCard\obj\Debug\TechSvr.ReadCard.dll
+D:\Learning\TechSvr\TechSvr.ReadCard\obj\Debug\TechSvr.ReadCard.pdb
+D:\Learning\TechSvr\TechSvr\bin\debug\Plugins\TechSvr.ReadCard.dll
+D:\Learning\TechSvr\TechSvr\bin\debug\Plugins\TechSvr.ReadCard.pdb
+D:\Learning\TechSvr\TechSvr\bin\debug\Plugins\ReadCard\TechSvr.ReadCard.dll
+D:\Learning\TechSvr\TechSvr\bin\debug\Plugins\ReadCard\TechSvr.ReadCard.pdb
+D:\Learning\TechSvr\TechSvr\Plugins\TechSvr.ReadCard\obj\Debug\TechSvr.ReadCard.csprojResolveAssemblyReference.cache
+D:\Learning\TechSvr\TechSvr\Plugins\TechSvr.ReadCard\obj\Debug\TechSvr.ReadCard.csproj.CoreCompileInputs.cache
+D:\Learning\TechSvr\TechSvr\Plugins\TechSvr.ReadCard\obj\Debug\TechSvr.ReadCard.dll
+D:\Learning\TechSvr\TechSvr\Plugins\TechSvr.ReadCard\obj\Debug\TechSvr.ReadCard.pdb

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{026BD036-72D8-4A68-8EE0-6F253E01EABA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TechSvr</RootNamespace>
+    <AssemblyName>TechSvr</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>wn.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\LogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LogControl.Designer.cs">
+      <DependentUpon>LogControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ModuleForm\OutputRecordCountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuleForm\OutputRecordCountForm.Designer.cs">
+      <DependentUpon>OutputRecordCountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleForm\PortSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuleForm\PortSettingForm.Designer.cs">
+      <DependentUpon>PortSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleForm\PrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuleForm\PrintForm.Designer.cs">
+      <DependentUpon>PrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Server.cs" />
+    <Compile Include="TechSvrForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TechSvrForm.Designer.cs">
+      <DependentUpon>TechSvrForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\LogControl.resx">
+      <DependentUpon>LogControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuleForm\OutputRecordCountForm.resx">
+      <DependentUpon>OutputRecordCountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuleForm\PortSettingForm.resx">
+      <DependentUpon>PortSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuleForm\PrintForm.resx">
+      <DependentUpon>PrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="TechSvrForm.resx">
+      <DependentUpon>TechSvrForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharpHttpServer\SharpHttpServer.csproj">
+      <Project>{28183cb5-4ae9-4beb-a71c-a698e59f0217}</Project>
+      <Name>SharpHttpServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechSvr.Dispatcher\TechSvr.Dispatcher.csproj">
+      <Project>{9f3e6b4c-0009-4718-b1f8-8b04443c5305}</Project>
+      <Name>TechSvr.Dispatcher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechSvr.Utils\TechSvr.Utils.csproj">
+      <Project>{B95275F7-2467-4080-924F-F509D0DE0125}</Project>
+      <Name>TechSvr.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wn.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

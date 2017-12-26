@@ -1,0 +1,6 @@
+D:\Learning\TechSvr\LocalServerTest\bin\LocalServerTest.dll.config
+D:\Learning\TechSvr\LocalServerTest\bin\LocalServerTest.dll
+D:\Learning\TechSvr\LocalServerTest\bin\LocalServerTest.pdb
+D:\Learning\TechSvr\LocalServerTest\obj\Debug\LocalServerTest.csproj.CoreCompileInputs.cache
+D:\Learning\TechSvr\LocalServerTest\obj\Debug\LocalServerTest.dll
+D:\Learning\TechSvr\LocalServerTest\obj\Debug\LocalServerTest.pdb

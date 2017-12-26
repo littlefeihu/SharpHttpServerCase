@@ -1,0 +1,11 @@
+D:\Work\TechSvr\SharpHttpServer\bin\Debug\SharpHttpServer.dll
+D:\Work\TechSvr\SharpHttpServer\bin\Debug\SharpHttpServer.pdb
+D:\Work\TechSvr\SharpHttpServer\obj\Debug\SharpHttpServer.csproj.CoreCompileInputs.cache
+D:\Work\TechSvr\SharpHttpServer\obj\Debug\SharpHttpServer.dll
+D:\Work\TechSvr\SharpHttpServer\obj\Debug\SharpHttpServer.pdb
+D:\Work\TechSvr\SharpHttpServer\obj\Debug\SharpHttpServer.csprojResolveAssemblyReference.cache
+D:\Learning\TechSvr\SharpHttpServer\bin\Debug\SharpHttpServer.dll
+D:\Learning\TechSvr\SharpHttpServer\bin\Debug\SharpHttpServer.pdb
+D:\Learning\TechSvr\SharpHttpServer\obj\Debug\SharpHttpServer.csproj.CoreCompileInputs.cache
+D:\Learning\TechSvr\SharpHttpServer\obj\Debug\SharpHttpServer.dll
+D:\Learning\TechSvr\SharpHttpServer\obj\Debug\SharpHttpServer.pdb

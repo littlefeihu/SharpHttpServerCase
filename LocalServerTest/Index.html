@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" charset="utf-8" src="jquery.js">
+    </script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <form action="" method="post" class="basic-grey">
+        <h1>
+            HttpRequest 测试
+            <span>Please fill options in the fields.</span>
+        </h1>
+        <table style="width:100%;">
+            <tr>
+                <td> <span>服务地址 :</span></td>
+                <td> <input type="text" name="name" value='http://localhost:8090/api/command' id='txtUrl' /></td>
+            </tr>
+            <tr>
+                <td><span>请求方式 :</span></td>
+                <td>
+                    <input name="requestMethod" type='radio' checked="checked" value="POST" />POST&nbsp;
+                    <input name="requestMethod" type="radio" value="GET" />GET
+                </td>
+            </tr>
+            <tr>
+                <td><span>请求功能 :</span></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+
+                                <input class="requestFunc" name="requestFunc" id="requestFunc" type='radio' checked="checked" value="msgtype=computerinfo&infname=Com_HostInfo&inftype=Delphi&validateid=uey943" />
+                                <label for="requestFunc">获取计算机信息</label>
+                            </td>
+                            <td>
+                                <input class="requestFunc" name="requestFunc" id="requestFunc1" type="radio" value="msgtype=print&infname=com_PrintReport&inftype=Delphi&validateid=" />
+                                <label for="requestFunc1">打印</label>
+                            </td>
+                            <td>
+
+                                <input class="requestFunc" name="requestFunc" id="requestFunc2" type="radio" value="msgtype=readcard&infname=ReadCard.dll&inftype=csharp&validateid=uey94379230" />
+                                <label for="requestFunc2">读卡</label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>     <span>消息内容 :</span></td>
+                <td>
+                    <textarea name="message" id='txtparam'>
+                
+             </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>   <span>返回结果</span></td>
+                <td>
+                    <div class='res'>
+                        <ul></ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span>&nbsp;</span>
+                    <input type="button" class="button" value="发送" id='send' />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    var postDataString = "[{ID:1,Name:'Andrew Fuller' },{ID:2,Name:'Nancy Davolio'},{ID:3,Name:'Margaret Peacock'}]";
+    $("#txtparam").val(postDataString);
+
+    $("#send").click(function () {
+        var data23 = "333333333333";
+        var method = $("input[name='requestMethod']:checked").val();
+        var requestFunc = $("input[class='requestFunc']:checked").val();
+        var params = $('#txtparam').val();
+        var url = $('#txtUrl').val() + '?' + requestFunc;
+        if (method === 'GET') params = null;
+        $.ajax({
+            type: method,
+            url: url,
+            data: params,
+            success: function (res) {
+                alert(res);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+
+                alert('数据请求出错');
+            }
+        });
+    });
+</script>
