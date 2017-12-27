@@ -26,38 +26,22 @@ namespace TechSvr.Print
             Thread importThread = new Thread(() =>
             {
                 var jobject = request.ToObject<dynamic>();
-
                 var template = jobject.TEMPLATE;
-                var printMode = jobject.PRINTMODE;
+                var printMode = jobject.PRINTMODE.ToString();
 
-                var maindataStr = jobject.DATA.MAINDATA.ToString();
-                var mainDataTable = JsonConvert.DeserializeObject<DataTable>(maindataStr);
-                mainDataTable.TableName = "MAINDATA";
-
-                var FDataSet = new DataSet();
-                FDataSet.Tables.Add(mainDataTable);
-                if (jobject.DATA.DETAILDATA != null)
-                {
-                    var subDataTable = JsonConvert.DeserializeObject<DataTable>(jobject.DATA.DETAILDATA.ToString());
-                    subDataTable.TableName = "subDataTable";
-                    FDataSet.Tables.Add(subDataTable);
-                }
                 using (Report report = new Report())
                 {
                     report.Load(@"Plugins\FastPrint\" + template);
-                    report.RegisterData(FDataSet);
-                    report.PrintSettings.ShowDialog = true;
-                    switch (jobject.PRINTMODE.ToString())
+                    report.RegisterData(BuildDS(jobject));
+                    switch (printMode)
                     {
                         //预览
                         case "0":
-                            report.Show(TechSvrApplication.Instance.PrintFrm);
-                            TechSvrApplication.Instance.PrintFrm.ShowDialog();
+                            report.Show();
                             break;
                         //设计
                         case "1":
-                            report.Design(TechSvrApplication.Instance.PrintFrm);
-                            TechSvrApplication.Instance.PrintFrm.ShowDialog();
+                            report.Design();
                             break;
                         //打印
                         case "2":
@@ -75,6 +59,30 @@ namespace TechSvr.Print
             importThread.Join();
 
             return "Print Test";
+        }
+
+        /// <summary>
+        /// 构建数据源
+        /// </summary>
+        /// <param name="jobject"></param>
+        /// <returns></returns>
+        private DataSet BuildDS(dynamic jobject)
+        {
+            var FDataSet = new DataSet();
+
+            if (jobject.DATA.MAINDATA != null)
+            {
+                var mainDataTable = JsonConvert.DeserializeObject<DataTable>(jobject.DATA.MAINDATA.ToString());
+                mainDataTable.TableName = "mainDataTable";
+                FDataSet.Tables.Add(mainDataTable);
+            }
+            if (jobject.DATA.DETAILDATA != null)
+            {
+                var subDataTable = JsonConvert.DeserializeObject<DataTable>(jobject.DATA.DETAILDATA.ToString());
+                subDataTable.TableName = "subDataTable";
+                FDataSet.Tables.Add(subDataTable);
+            }
+            return FDataSet;
         }
     }
 }
