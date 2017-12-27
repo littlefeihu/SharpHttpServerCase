@@ -1,4 +1,6 @@
 ﻿using FastReport;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,35 +21,51 @@ namespace TechSvr.Print
             }
         }
 
-        public string Excute(string input)
+        public string Excute(string request)
         {
             Thread importThread = new Thread(() =>
             {
+                var jobject = request.ToObject<dynamic>();
+
+                var template = jobject.TEMPLATE;
+                var printMode = jobject.PRINTMODE;
+
+                var maindataStr = jobject.DATA.MAINDATA.ToString();
+                var mainDataTable = JsonConvert.DeserializeObject<DataTable>(maindataStr);
+                mainDataTable.TableName = "MAINDATA";
+
                 var FDataSet = new DataSet();
-
-                DataTable table = new DataTable();
-                table.TableName = "Employees";
-                FDataSet.Tables.Add(table);
-                table.Columns.Add("ID", typeof(int));
-                table.Columns.Add("Name", typeof(string));
-
-                var emps = input.ToObject<List<Employee>>();
-                foreach (var emp in emps)
+                FDataSet.Tables.Add(mainDataTable);
+                if (jobject.DATA.DETAILDATA != null)
                 {
-                    table.Rows.Add(emp.ID, emp.Name);
+                    var subDataTable = JsonConvert.DeserializeObject<DataTable>(jobject.DATA.DETAILDATA.ToString());
+                    subDataTable.TableName = "subDataTable";
+                    FDataSet.Tables.Add(subDataTable);
                 }
-
                 using (Report report = new Report())
                 {
-                    report.Load(@"Plugins\FastPrint\report.frx");
+                    report.Load(@"Plugins\FastPrint\" + template);
                     report.RegisterData(FDataSet);
-
                     report.PrintSettings.ShowDialog = true;
-                    report.Show(TechSvrApplication.Instance.PrintFrm);
-                    TechSvrApplication.Instance.PrintFrm.ShowDialog();
-
-                    //System.Drawing.Printing.PrinterSettings setting = new System.Drawing.Printing.PrinterSettings();
-                    //report.ShowPrintDialog(out setting);
+                    switch (jobject.PRINTMODE.ToString())
+                    {
+                        //预览
+                        case "0":
+                            report.Show(TechSvrApplication.Instance.PrintFrm);
+                            TechSvrApplication.Instance.PrintFrm.ShowDialog();
+                            break;
+                        //设计
+                        case "1":
+                            report.Design(TechSvrApplication.Instance.PrintFrm);
+                            TechSvrApplication.Instance.PrintFrm.ShowDialog();
+                            break;
+                        //打印
+                        case "2":
+                            report.Print();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             });
 

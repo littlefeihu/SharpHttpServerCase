@@ -77,7 +77,160 @@
 
 <script type="text/javascript">
 
-    var postDataString = "[{ID:1,Name:'Andrew Fuller' },{ID:2,Name:'Nancy Davolio'},{ID:3,Name:'Margaret Peacock'}]";
+   
+    var j = {
+        "TEMPLATE": "report.frx",
+        "PRINTMODE": "1",
+        "DATA": {
+            "MAINDATA": [
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "1",
+                    "SLAVENAME": "标本溶血",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "1",
+                    "MEMCODE2": "RX",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                },
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "2",
+                    "SLAVENAME": "标本脂血",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "2",
+                    "MEMCODE2": "ZX",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                },
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "3",
+                    "SLAVENAME": "标本血少",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "3",
+                    "MEMCODE2": "XS",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                },
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "4",
+                    "SLAVENAME": "标本严重溶血",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "4",
+                    "MEMCODE2": "YZRX",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                },
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "5",
+                    "SLAVENAME": "标本严重脂血",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "5",
+                    "MEMCODE2": "YZZX",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                },
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "6",
+                    "SLAVENAME": "标本钾高复验",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "6",
+                    "MEMCODE2": "JGFY",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                },
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "7",
+                    "SLAVENAME": "标本钾低复验",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "7",
+                    "MEMCODE2": "JDFY",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                },
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "8",
+                    "SLAVENAME": "标本严重黄胆",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "8",
+                    "MEMCODE2": "YZHD",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                },
+                {
+                    "SUBSYSCODE": "LIMS",
+                    "CLASSCODE": "标本说明",
+                    "SLAVENO": "9",
+                    "SLAVENAME": "标本溶血，脂血",
+                    "REMARK": "",
+                    "EXTERNCODE": "",
+                    "ORDERNO": "0",
+                    "MEMCODE1": "9",
+                    "MEMCODE2": "RXZX",
+                    "SLAVENUM": "",
+                    "VISIBLE": "1",
+                    "SYSFLAG": "0",
+                    "STOPFLAG": "0",
+                    "GROUPCODE": "常规字典"
+                }
+            ]
+        }
+    };
+    var postDataString = JSON.stringify(j);
     $("#txtparam").val(postDataString);
 
     $("#send").click(function () {

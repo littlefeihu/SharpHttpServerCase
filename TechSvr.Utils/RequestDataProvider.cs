@@ -15,7 +15,7 @@ namespace TechSvr.Utils
         {
             _request = request;
         }
-
+                              
         public NameValueCollection GetParams()
         {
             string queryString = _request.RawUrl.Substring(_request.RawUrl.IndexOf("?") + 1);

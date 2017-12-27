@@ -36,11 +36,14 @@ namespace TechSvr.Utils
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Constants.INI_FileName);
         }
-        public void WhiteLog(string msg)
+        public void WhiteLog(string msg, bool showinApp = true)
         {
             LogFactory.GetLogger(this.GetType()).Info(msg);
-            if (LogOutput != null)
-                LogOutput(msg);
+            if (showinApp)
+            {
+                if (LogOutput != null)
+                    LogOutput(msg);
+            }
         }
 
         /// <summary>

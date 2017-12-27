@@ -27,22 +27,27 @@ namespace TechSvr.Dispatcher
         {
             var parameters = new RequestDataProvider(request).GetParams();
 
+
             var msgtype = parameters.Get(Constants.QueryString_MsgType);
             var infname = parameters.Get(Constants.QueryString_InfName);
             var inftype = parameters.Get(Constants.QueryString_InfType);
             var validateid = parameters.Get(Constants.QueryString_ValidateId);
             var data = parameters.Get(Constants.QueryString_Data);
+            TechSvrApplication.Instance.WhiteLog("请求类型：" + msgtype);
+            TechSvrApplication.Instance.WhiteLog("QueryString参数：" + parameters.ToString(), false);
 
             //查询字符串中取不到值 则尝试从RequestBody中获取数据
             if (string.IsNullOrEmpty(data))
             {
                 data = parameters.Get(Constants.PostBody_Data);
+                TechSvrApplication.Instance.WhiteLog("PostBody参数：" + data, false);
             }
 
-            TechSvrApplication.Instance.WhiteLog("请求类型：" + msgtype);
             var cmd = TechSvrApplication.Instance.GetCommand(msgtype);
+            var excuteResult = cmd.Excute(data);
 
-            return cmd.Excute(data);
+            TechSvrApplication.Instance.WhiteLog("请求类型：" + msgtype, false);
+            return excuteResult;
         }
     }
 }
