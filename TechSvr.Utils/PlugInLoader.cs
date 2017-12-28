@@ -16,7 +16,7 @@ namespace TechSvr.Utils
         public static IEnumerable<ICommand> Load()
         {
             var pluginDirctory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
-            var dllFiles = Directory.GetFiles(pluginDirctory, "*.dll", SearchOption.AllDirectories);
+            var dllFiles = Directory.GetFiles(pluginDirctory, "TechSvr.Plugin.*.dll", SearchOption.AllDirectories);
             foreach (var dllFile in dllFiles)
             {
                 Assembly assembly = Assembly.LoadFile(dllFile);

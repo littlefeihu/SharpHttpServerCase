@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using TechSvr.Utils;
 
-namespace TechSvr.GetMachineInfo
+namespace TechSvr.Plugin.GetMachineInfo
 {
     public class GetMachineInfoCommand : ICommand
     {

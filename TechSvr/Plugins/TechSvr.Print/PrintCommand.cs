@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using TechSvr.Utils;
 
-namespace TechSvr.Print
+namespace TechSvr.Plugin.Print
 {
     public class PrintCommand : ICommand
     {

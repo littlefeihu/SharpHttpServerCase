@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using TechSvr.Utils;
 
-namespace TechSvr.ReadCard
+namespace TechSvr.Plugin.ReadCard
 {
     public class ReadCardCommand : ICommand
     {
