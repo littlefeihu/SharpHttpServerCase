@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -21,7 +22,7 @@ namespace TechSvr.Plugin.DelphiPrint
             {
                 string dllname = "com_PrintReport";
                 string inputContext = input;
-                string filepathdel = @"C:\Windows\SysWOW64\winning" + "\\" + "CDelTransferModule";
+                string filepathdel = Path.Combine(Directory.GetCurrentDirectory(), @"Plugins\DelphiPrint\");
                 IntPtr filepathdelptr = Marshal.StringToHGlobalAnsi(filepathdel);
                 IntPtr dllnameptr = Marshal.StringToHGlobalAnsi(dllname);
                 IntPtr inputcontentptr = Marshal.StringToHGlobalAnsi(inputContext);//需要传入的信息
@@ -31,7 +32,7 @@ namespace TechSvr.Plugin.DelphiPrint
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
                 throw;
             }
             return resultmsg;
