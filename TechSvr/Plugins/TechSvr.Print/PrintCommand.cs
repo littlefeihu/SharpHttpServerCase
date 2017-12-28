@@ -35,13 +35,14 @@ namespace TechSvr.Plugin.Print
                     string reportfileName = @"Plugins\FastPrint\" + template;
                     report.Load(reportfileName);
                     report.RegisterData(BuildDS(jobject));
-                    TechSvrApplication.Instance.MainFrm.Invoke(new MethodInvoker(() =>
+
+                    switch (printMode)
                     {
-                        switch (printMode)
-                        {
-                            case FPrintMode.Preview:
-                            case FPrintMode.Design:
-                                var mainform = TechSvrApplication.Instance.MainFrm;
+                        case FPrintMode.Preview:
+                        case FPrintMode.Design:
+                            var mainform = TechSvrApplication.Instance.MainFrm;
+                            mainform.Invoke(new MethodInvoker(() =>
+                            {
                                 mainform.TopMost = true;
                                 if (mainform.WindowState == FormWindowState.Minimized)
                                 {
@@ -58,17 +59,16 @@ namespace TechSvr.Plugin.Print
                                     report.Design();
                                 }
                                 mainform.WindowState = FormWindowState.Minimized;
-                                break;
-                            case FPrintMode.Print:
-                                //不弹打印窗口 直接打印
-                                report.PrintSettings.ShowDialog = false;
-                                report.Print();
-                                break;
-                            default:
-                                break;
-                        }
-
-                    }));
+                            }));
+                            break;
+                        case FPrintMode.Print:
+                            //不弹打印窗口 直接打印
+                            report.PrintSettings.ShowDialog = false;
+                            report.Print();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             });
 
