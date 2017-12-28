@@ -26,14 +26,6 @@ namespace TechSvr
                 Application.SetCompatibleTextRenderingDefault(false);
                 var mainform = new TechSvrForm(args);
                 mainform.Run();
-
-                var printfrm = new PrintForm();
-                printfrm.IsMdiContainer = true;
-                printfrm.WindowState = FormWindowState.Maximized;
-                printfrm.TopMost = true;
-
-                TechSvrApplication.Instance.SetPrintForm(printfrm);
-
                 Application.Run(mainform);
                 instance.ReleaseMutex();
             }

@@ -26,6 +26,7 @@ namespace TechSvr
             MyServer.StatusChanged += MyServer_StatusChanged;
             MyServer.CmdErrored += MyServer_CmdErrored;
             LoadLogControl();
+            TechSvrApplication.Instance.SetMainFrm(this);
         }
 
         private void LoadLogControl()
@@ -165,7 +166,7 @@ namespace TechSvr
             }
         }
 
-        private void ShowForm()
+        public void ShowForm()
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
@@ -174,6 +175,17 @@ namespace TechSvr
                 notifyIcon1.Visible = false;
             }
         }
+
+        public void HideForm()
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.ShowInTaskbar = false;
+                this.WindowState = FormWindowState.Minimized;
+                notifyIcon1.Visible = true;
+            }
+        }
+
         #endregion
 
         /// <summary>

@@ -25,10 +25,10 @@ namespace TechSvr.Plugin.DelphiPrint
                 string filepathdel = Path.Combine(Directory.GetCurrentDirectory(), @"Plugins\DelphiPrint\");
                 IntPtr filepathdelptr = Marshal.StringToHGlobalAnsi(filepathdel);
                 IntPtr dllnameptr = Marshal.StringToHGlobalAnsi(dllname);
-                IntPtr inputcontentptr = Marshal.StringToHGlobalAnsi(inputContext);//需要传入的信息
+                IntPtr inputcontentptr = Marshal.StringToHGlobalAnsi(inputContext);
 
-                IntPtr resultptr = DllTransfer.CommonMethodD(filepathdelptr, dllnameptr, inputcontentptr);//Delphi中接口入参形式
-                resultmsg = Marshal.PtrToStringAnsi(resultptr);//dll返回信息
+                IntPtr resultptr = DllTransfer.CommonMethodD(filepathdelptr, dllnameptr, inputcontentptr);
+                resultmsg = Marshal.PtrToStringAnsi(resultptr);
             }
             catch (Exception ex)
             {

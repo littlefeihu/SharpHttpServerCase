@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="DllTransfer.cs" />
+    <Compile Include="FPrintMode.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="INIHelper.cs" />
     <Compile Include="Json.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestDataProvider.cs" />
     <Compile Include="TechSvrApplication.cs" />
+    <Compile Include="WinAPIHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -85,15 +85,15 @@ namespace TechSvr.Utils
         }
 
 
-        Form _printFrm;
+        Form _mainFrm;
         /// <summary>
         /// 打印窗口
         /// </summary>
-        public System.Windows.Forms.Form PrintFrm
+        public System.Windows.Forms.Form MainFrm
         {
             get
             {
-                return _printFrm;
+                return _mainFrm;
             }
         }
 
@@ -101,9 +101,9 @@ namespace TechSvr.Utils
         /// 设置打印窗口
         /// </summary>
         /// <param name="printFrm"></param>
-        public void SetPrintForm(Form printFrm)
+        public void SetMainFrm(Form mainFrm)
         {
-            _printFrm = printFrm;
+            _mainFrm = mainFrm;
         }
     }
 }
