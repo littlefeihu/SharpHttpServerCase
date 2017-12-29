@@ -1,25 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Report ScriptLanguage="CSharp" ReportInfo.Created="06/20/2009 22:40:42" ReportInfo.Modified="12/28/2017 16:28:52" ReportInfo.CreatorVersion="2014.2.3.0">
-  <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlq+rW0RkboK+/8CKGGYUID3ctBV8q9SvKYxl3iiE7vBnh7Tgou0+4WFf3NfmPSvHVFJAttF9tdyRmOrNEtDY57eFe9H0XWSPeF4AmaytWItICdT1Xw+KfaWbp1GuZbBSixzp8vr6+Tp5ae6MZgcTCotu2vwODjQU6bYMbTbVYgfPTpqjq+v4vWNFkhm7GwbKsO">
-      <TableDataSource Name="mainDataTable" DataType="System.Int32" Enabled="true" TableName="mainDataTable">
-        <Column Name="SUBSYSCODE" DataType="System.String"/>
-        <Column Name="CLASSCODE" DataType="System.String"/>
-        <Column Name="SLAVENO" DataType="System.String"/>
-        <Column Name="SLAVENAME" DataType="System.String"/>
-        <Column Name="REMARK" DataType="System.String"/>
-        <Column Name="EXTERNCODE" DataType="System.String"/>
-        <Column Name="ORDERNO" DataType="System.String"/>
-        <Column Name="MEMCODE1" DataType="System.String"/>
-        <Column Name="MEMCODE2" DataType="System.String"/>
-        <Column Name="SLAVENUM" DataType="System.String"/>
-        <Column Name="VISIBLE" DataType="System.String"/>
-        <Column Name="SYSFLAG" DataType="System.String"/>
-        <Column Name="STOPFLAG" DataType="System.String"/>
-        <Column Name="GROUPCODE" DataType="System.String"/>
-      </TableDataSource>
-    </MsSqlDataConnection>
-  </Dictionary>
   <ReportPage Name="Page1">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
       <TextObject Name="Text5" Width="718.2" Height="28.35" Text="EMPLOYEES" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>

@@ -36,6 +36,12 @@ namespace TechSvr.Utils
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Constants.INI_FileName);
         }
+        public string GetFrxFullPath(string frxName)
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Plugins\FastPrint\", frxName);
+        }
+
+
         public void WhiteLog(string msg, bool showinApp = true)
         {
             LogFactory.GetLogger(this.GetType()).Info(msg);

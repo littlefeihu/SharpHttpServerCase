@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -27,13 +28,18 @@ namespace TechSvr.Plugin.Print
             Thread importThread = new Thread(() =>
             {
                 var jobject = request.ToObject<dynamic>();
-                var template = jobject.TEMPLATE;
+                var template = jobject.TEMPLATE.ToString();
                 var printMode = (FPrintMode)int.Parse(jobject.PRINTMODE.ToString());
 
                 using (Report report = new Report())
                 {
-                    string reportfileName = @"Plugins\FastPrint\" + template;
-                    report.Load(reportfileName);
+                    string reportfileName = TechSvrApplication.Instance.GetFrxFullPath(template);
+
+                    if (File.Exists(reportfileName))
+                    {
+                        report.Load(reportfileName);
+                    }
+
                     report.RegisterData(BuildDS(jobject));
 
                     switch (printMode)
