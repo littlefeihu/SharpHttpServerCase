@@ -12,15 +12,15 @@ namespace TechSvr.ModuleForm
 {
     public partial class PortSettingForm : Form
     {
-        public PortSettingForm(int port)
+        public PortSettingForm(string portStr)
         {
             InitializeComponent();
-            this.txtPort.Text = port.ToString();
+            this.txtPort.Text = portStr;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            INIHelper.WriteInteger(Constants.INI_ServicePort, int.Parse(txtPort.Text.Trim()), TechSvrApplication.Instance.GetINIFullPath());
+            INIHelper.WriteString(Constants.INI_ServicePort, txtPort.Text.Trim(), TechSvrApplication.Instance.GetINIFullPath());
             MessageBox.Show("端口已保存成功");
         }
     }

@@ -25,28 +25,38 @@ namespace TechSvr.Dispatcher
         /// <returns></returns>
         public static string Dispatch(HttpListenerRequest request)
         {
-            var parameters = new RequestDataProvider(request).GetParams();
-
-
-            var msgtype = parameters.Get(Constants.QueryString_MsgType);
-            var infname = parameters.Get(Constants.QueryString_InfName);
-            var inftype = parameters.Get(Constants.QueryString_InfType);
-            var validateid = parameters.Get(Constants.QueryString_ValidateId);
-            var data = parameters.Get(Constants.QueryString_Data);
-            TechSvrApplication.Instance.WhiteLog("请求类型：" + msgtype);
-            TechSvrApplication.Instance.WhiteLog("QueryString参数：" + parameters.ToString(), false);
-
-            //查询字符串中取不到值 则尝试从RequestBody中获取数据
-            if (string.IsNullOrEmpty(data))
+            var excuteResult = "";
+            var msgtype = "";
+            try
             {
-                data = parameters.Get(Constants.PostBody_Data);
-                TechSvrApplication.Instance.WhiteLog("PostBody参数：" + data, false);
+                var provider = new RequestDataProvider(request);
+                var parameters = provider.GetParams();
+                msgtype = parameters.Get(Constants.QueryString_MsgType);
+                var infname = parameters.Get(Constants.QueryString_InfName);
+                var inftype = parameters.Get(Constants.QueryString_InfType);
+                var validateid = parameters.Get(Constants.QueryString_ValidateId);
+                var data = parameters.Get(Constants.QueryString_Data);
+                TechSvrApplication.Instance.WhiteLog("接收到请求：" + msgtype);
+                TechSvrApplication.Instance.WhiteLog("QueryString参数：" + provider.QueryString, false);
+
+
+                //查询字符串中取不到值 则尝试从RequestBody中获取数据
+                if (string.IsNullOrEmpty(data))
+                {
+                    data = parameters.Get(Constants.PostBody_Data);
+                    TechSvrApplication.Instance.WhiteLog("PostBody参数：" + data, false);
+                }
+                var cmd = TechSvrApplication.Instance.GetCommand(msgtype);
+
+                excuteResult = cmd.Excute(data);
+                TechSvrApplication.Instance.WhiteLog("已处理请求：" + msgtype + ",执行成功");
+            }
+            catch (Exception ex)
+            {
+                TechSvrApplication.Instance.WhiteLog("已处理请求：" + msgtype + ",执行失败,错误信息:" + ex.Message);
+                throw;
             }
 
-            var cmd = TechSvrApplication.Instance.GetCommand(msgtype);
-            var excuteResult = cmd.Excute(data);
-
-            TechSvrApplication.Instance.WhiteLog("请求类型：" + msgtype, false);
             return excuteResult;
         }
     }

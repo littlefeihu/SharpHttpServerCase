@@ -16,15 +16,13 @@ namespace TechSvr
     public partial class TechSvrForm : Form
     {
         private ContextMenu notifyiconMnu;
-        private Server MyServer;
+        private List<Server> MyServers = new List<Server>();
         public TechSvrForm(string[] args)
         {
             InitializeComponent();
             Initializenotifyicon();
             this.SizeChanged += TechSvrForm_SizeChanged;
-            MyServer = new Server(Port);
-            MyServer.StatusChanged += MyServer_StatusChanged;
-            MyServer.CmdErrored += MyServer_CmdErrored;
+            InitServer();
             LoadLogControl();
             TechSvrApplication.Instance.SetMainFrm(this);
         }
@@ -40,24 +38,49 @@ namespace TechSvr
             this.tabPage2.Controls.Add(this.logControl1);
         }
 
-        public int Port
+        private void InitServer()
         {
-            get
+            foreach (var port in Ports)
             {
-                var port = INIHelper.ReadInteger(Constants.INI_ServicePort, TechSvrApplication.Instance.GetINIFullPath());
-                if (port == 0)
-                {
-                    port = int.Parse(System.Configuration.ConfigurationManager.AppSettings["port"]);
-                }
-                return port;
+                var MyServer = new Server(int.Parse(port));
+                MyServer.StatusChanged += MyServer_StatusChanged;
+                MyServer.CmdErrored += MyServer_CmdErrored;
+                MyServers.Add(MyServer);
             }
         }
 
-        public void Run()
+        public List<string> Ports
         {
-            MyServer.Run();
+            get
+            {
+                var portsStr = INIHelper.ReadString(Constants.INI_ServicePort, TechSvrApplication.Instance.GetINIFullPath());
+
+                if (string.IsNullOrEmpty(portsStr))
+                {
+                    portsStr = System.Configuration.ConfigurationManager.AppSettings["port"];
+                }
+
+                return portsStr.Split(',').OrderBy(o => o).ToList();
+            }
         }
 
+
+
+        public void Run()
+        {
+            foreach (var server in MyServers)
+            {
+                server.Run();
+            }
+        }
+        public void Stop()
+        {
+
+            foreach (var server in MyServers)
+            {
+                server.Stop();
+            }
+        }
         #region 内部事件
         private void MyServer_CmdErrored(Exception ex)
         {
@@ -72,16 +95,16 @@ namespace TechSvr
                 this.ShowInTaskbar = false;
             }
         }
-        private void MyServer_StatusChanged(bool isStarted)
+        private void MyServer_StatusChanged(bool isStarted, string baseUrl)
         {
             string statusChangeText = "";
             if (isStarted)
             {
-                statusChangeText = "服务已启动," + MyServer.BaseUrl;
+                statusChangeText = "服务已启动," + baseUrl;
             }
             else
             {
-                statusChangeText = "服务已关闭," + MyServer.BaseUrl;
+                statusChangeText = "服务已关闭," + baseUrl;
             }
 
             while (!this.IsHandleCreated)
@@ -105,12 +128,12 @@ namespace TechSvr
 
         private void 启动服务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MyServer.Run();
+            Run();
         }
 
         private void 关闭服务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MyServer.Stop();
+            Stop();
         }
 
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -195,25 +218,30 @@ namespace TechSvr
         /// <param name="e"></param>
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            int originPort = Port;
-            var portSettingForm = new PortSettingForm(originPort);
+            var originPorts = Ports;
+            var portSettingForm = new PortSettingForm(string.Join(",", Ports));
 
             portSettingForm.ShowDialog();
-            if (originPort != Port)
-            {
-                if (MyServer.IsStarted)
-                {
-                    MyServer.Stop();
 
-                    MyServer.SetPort(Port);
-                    MyServer.Run();
+
+            if (originPorts != Ports)
+            {
+                Stop();
+
+                InitServer();
+
+                if (MyServers.Any(o => o.IsStarted))
+                {
+                    Run();
                 }
             }
+
         }
+
 
         private void TechSvrForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MyServer.Stop();
+            Stop();
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)

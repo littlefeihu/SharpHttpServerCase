@@ -32,14 +32,14 @@ namespace SharpHttpServer.Net.Http
             {
                 isStarted = value;
                 if (StatusChanged != null)
-                    StatusChanged(isStarted);
+                    StatusChanged(isStarted, BaseUrl);
             }
         }
 
         /// <summary>
         /// 服务状态变化事件
         /// </summary>
-        public event Action<bool> StatusChanged;
+        public event Action<bool, string> StatusChanged;
         /// <summary>
         /// 命令执行出错事件
         /// </summary>

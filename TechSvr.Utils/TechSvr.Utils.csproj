@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="DllTransfer.cs" />
+    <Compile Include="ExtentionMethod.cs" />
     <Compile Include="FPrintMode.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="INIHelper.cs" />

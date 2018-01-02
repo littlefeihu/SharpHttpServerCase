@@ -15,10 +15,11 @@ namespace TechSvr.Utils
         {
             _request = request;
         }
-                              
+
         public NameValueCollection GetParams()
         {
             string queryString = _request.RawUrl.Substring(_request.RawUrl.IndexOf("?") + 1);
+            QueryString = queryString;
             var paraments = HttpUtility.ParseQueryString(queryString);
 
             if (_request.HasEntityBody)
@@ -34,6 +35,11 @@ namespace TechSvr.Utils
                 }
             }
             return paraments;
+        }
+
+        public string QueryString
+        {
+            get; private set;
         }
     }
 }

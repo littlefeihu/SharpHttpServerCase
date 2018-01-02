@@ -308,14 +308,13 @@ namespace TechSvr.Utils
         /// <param name="defaultValue" />
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string ReadString(string sectionName, string keyName, string defaultValue, string path)
+        public static string ReadString(string keyName, string path, string defaultValue = "", string sectionName = Constants.INI_SectionName)
         {
             const int MAXSIZE = 255;
             StringBuilder temp = new StringBuilder(MAXSIZE);
             GetPrivateProfileString(sectionName, keyName, defaultValue, temp, 255, path);
             return temp.ToString();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -323,7 +322,7 @@ namespace TechSvr.Utils
         /// <param name="keyName"></param>
         /// <param name="value"></param>
         /// <param name="path"></param>
-        public static void WriteString(string sectionName, string keyName, string value, string path)
+        public static void WriteString(string keyName, string value, string path, string sectionName = Constants.INI_SectionName)
         {
             WritePrivateProfileString(sectionName, keyName, value, path);
         }

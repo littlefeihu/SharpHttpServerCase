@@ -39,9 +39,13 @@ namespace TechSvr.Plugin.Print
                     {
                         report.Load(reportfileName);
                     }
+                    else
+                    {    //模板文件不存在，则重新设置文件名
+                        report.FileName = reportfileName;
+                    }
 
                     report.RegisterData(BuildDS(jobject));
-
+           
                     switch (printMode)
                     {
                         case FPrintMode.Preview:
