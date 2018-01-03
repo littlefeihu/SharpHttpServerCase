@@ -39,6 +39,7 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
@@ -48,7 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="DirectoryManage.cs" />
     <Compile Include="DllTransfer.cs" />
+    <Compile Include="DTO\CmdResult.cs" />
+    <Compile Include="InputArgs.cs" />
     <Compile Include="ExtentionMethod.cs" />
     <Compile Include="FPrintMode.cs" />
     <Compile Include="ICommand.cs" />
@@ -65,5 +69,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

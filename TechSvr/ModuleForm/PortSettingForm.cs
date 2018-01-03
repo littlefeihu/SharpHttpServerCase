@@ -20,7 +20,7 @@ namespace TechSvr.ModuleForm
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            INIHelper.WriteString(Constants.INI_ServicePort, txtPort.Text.Trim(), TechSvrApplication.Instance.GetINIFullPath());
+            INIHelper.WriteString(Constants.INI_ServicePort, txtPort.Text.Trim(), DirectoryManage.GetINIFullPath());
             MessageBox.Show("端口已保存成功");
         }
     }

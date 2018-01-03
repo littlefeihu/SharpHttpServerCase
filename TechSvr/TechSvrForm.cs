@@ -40,6 +40,8 @@ namespace TechSvr
 
         private void InitServer()
         {
+            MyServers.Clear();
+
             foreach (var port in Ports)
             {
                 var MyServer = new Server(int.Parse(port));
@@ -53,7 +55,7 @@ namespace TechSvr
         {
             get
             {
-                var portsStr = INIHelper.ReadString(Constants.INI_ServicePort, TechSvrApplication.Instance.GetINIFullPath());
+                var portsStr = INIHelper.ReadString(Constants.INI_ServicePort, DirectoryManage.GetINIFullPath());
 
                 if (string.IsNullOrEmpty(portsStr))
                 {

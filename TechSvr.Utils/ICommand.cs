@@ -12,7 +12,7 @@ namespace TechSvr.Utils
         /// </summary>
         /// <param name="input">入参为string类型，格式为：XML或JSON</param>
         /// <returns></returns>
-        string Excute(string input);
+        string Excute(InputArgs input);
 
         string Name { get; }
     }

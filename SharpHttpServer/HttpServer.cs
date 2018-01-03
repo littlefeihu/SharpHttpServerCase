@@ -126,9 +126,13 @@ namespace SharpHttpServer.Net.Http
 
         public void Stop()
         {
-            listener.Stop();
-            listener.Close();
-            IsStarted = false;
+            if (IsStarted)
+            {
+                listener.Stop();
+                listener.Close();
+                IsStarted = false;
+            }
+
         }
 
         public RequestHandlerRegistrator Get

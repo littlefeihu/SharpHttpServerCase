@@ -32,16 +32,6 @@ namespace TechSvr.Utils
             Commands.AddRange(PlugInLoader.Load());
         }
 
-        public string GetINIFullPath()
-        {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Constants.INI_FileName);
-        }
-        public string GetFrxFullPath(string frxName)
-        {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Plugins\FastPrint\", frxName);
-        }
-
-
         public void WhiteLog(string msg, bool showinApp = true)
         {
             LogFactory.GetLogger(this.GetType()).Info(msg);
@@ -81,7 +71,7 @@ namespace TechSvr.Utils
         {
             get
             {
-                var recordCount = INIHelper.ReadInteger(Constants.INI_MAXRecordCount, TechSvrApplication.Instance.GetINIFullPath());
+                var recordCount = INIHelper.ReadInteger(Constants.INI_MAXRecordCount, DirectoryManage.GetINIFullPath());
                 if (recordCount == 0)
                 {
                     recordCount = 1000;

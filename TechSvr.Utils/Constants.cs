@@ -19,6 +19,7 @@ namespace TechSvr.Utils
         public const string QueryString_ValidateId = "validateid";
         public const string QueryString_Data = "data";
         public const string PostBody_Data = "postbody";
+        public const string QueryString_SysType = "systype";
         #endregion
 
 
@@ -33,5 +34,8 @@ namespace TechSvr.Utils
         #endregion
 
 
+
+        public const string MainDataTable = "mainDataTable";
+        public const string SubDataTable = "subDataTable";
     }
 }

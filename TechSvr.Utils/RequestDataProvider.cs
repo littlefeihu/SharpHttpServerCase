@@ -16,7 +16,7 @@ namespace TechSvr.Utils
             _request = request;
         }
 
-        public NameValueCollection GetParams()
+        private NameValueCollection GetParams()
         {
             string queryString = _request.RawUrl.Substring(_request.RawUrl.IndexOf("?") + 1);
             QueryString = queryString;
@@ -40,6 +40,29 @@ namespace TechSvr.Utils
         public string QueryString
         {
             get; private set;
+        }
+
+        /// <summary>
+        /// 构建输入参数
+        /// </summary>
+        public InputArgs BuildInputArgs()
+        {
+            var parameters = GetParams();
+            var msgtype = parameters.Get(Constants.QueryString_MsgType);
+            var infname = parameters.Get(Constants.QueryString_InfName);
+            var inftype = parameters.Get(Constants.QueryString_InfType);
+            var validateid = parameters.Get(Constants.QueryString_ValidateId);
+            var data = parameters.Get(Constants.QueryString_Data);
+            var systype = parameters.Get(Constants.QueryString_SysType);
+            var postBody = parameters.Get(Constants.PostBody_Data);
+
+            //查询字符串中取不到值 则尝试从RequestBody中获取数据
+            if (string.IsNullOrEmpty(data))
+            {
+                data = postBody;
+            }
+            return InputArgs.Create(postBody, msgtype, infname, inftype, validateid, data, systype);
+
         }
     }
 }

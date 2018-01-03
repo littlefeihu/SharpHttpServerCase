@@ -15,13 +15,13 @@ namespace TechSvr.Plugin.DelphiPrint
             get { return "DelphiPrint"; }
         }
 
-        public string Excute(string input)
+        public string Excute(InputArgs input)
         {
             string resultmsg = "";
             try
             {
                 string dllname = "com_PrintReport";
-                string inputContext = input;
+                string inputContext = input.Data;
                 string filepathdel = Path.Combine(Directory.GetCurrentDirectory(), @"Plugins\DelphiPrint\");
                 IntPtr filepathdelptr = Marshal.StringToHGlobalAnsi(filepathdel);
                 IntPtr dllnameptr = Marshal.StringToHGlobalAnsi(dllname);

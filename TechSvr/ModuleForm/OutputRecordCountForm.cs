@@ -20,7 +20,7 @@ namespace TechSvr.ModuleForm
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            INIHelper.WriteInteger(Constants.INI_MAXRecordCount, int.Parse(txtMaxRecordcount.Text.Trim()), TechSvrApplication.Instance.GetINIFullPath());
+            INIHelper.WriteInteger(Constants.INI_MAXRecordCount, int.Parse(txtMaxRecordcount.Text.Trim()), DirectoryManage.GetINIFullPath());
             MessageBox.Show("保存成功");
         }
     }

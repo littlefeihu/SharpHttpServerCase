@@ -15,7 +15,7 @@ namespace TechSvr.Plugin.CTest
             get { return "CTest"; }
         }
 
-        public string Excute(string input)
+        public string Excute(InputArgs input)
         {
             string resultmsg = "";
             try

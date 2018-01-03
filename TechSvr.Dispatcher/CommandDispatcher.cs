@@ -30,25 +30,20 @@ namespace TechSvr.Dispatcher
             try
             {
                 var provider = new RequestDataProvider(request);
-                var parameters = provider.GetParams();
-                msgtype = parameters.Get(Constants.QueryString_MsgType);
-                var infname = parameters.Get(Constants.QueryString_InfName);
-                var inftype = parameters.Get(Constants.QueryString_InfType);
-                var validateid = parameters.Get(Constants.QueryString_ValidateId);
-                var data = parameters.Get(Constants.QueryString_Data);
+                var input = provider.BuildInputArgs();
+                msgtype = input.MsgType;
+                var queryString = provider.QueryString;
+                var postBody = input.PostBody;
                 TechSvrApplication.Instance.WhiteLog("接收到请求：" + msgtype);
                 TechSvrApplication.Instance.WhiteLog("QueryString参数：" + provider.QueryString, false);
 
-
-                //查询字符串中取不到值 则尝试从RequestBody中获取数据
-                if (string.IsNullOrEmpty(data))
+                if (!string.IsNullOrEmpty(input.PostBody))
                 {
-                    data = parameters.Get(Constants.PostBody_Data);
-                    TechSvrApplication.Instance.WhiteLog("PostBody参数：" + data, false);
+                    TechSvrApplication.Instance.WhiteLog("PostBody参数：" + input.PostBody, false);
                 }
                 var cmd = TechSvrApplication.Instance.GetCommand(msgtype);
 
-                excuteResult = cmd.Excute(data);
+                excuteResult = cmd.Excute(input);
                 TechSvrApplication.Instance.WhiteLog("已处理请求：" + msgtype + ",执行成功");
             }
             catch (Exception ex)

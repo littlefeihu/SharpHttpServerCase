@@ -10,7 +10,7 @@ namespace TechSvr.Plugin.ReadCard
     {
         public string Name { get { return "readcard"; } }
 
-        public string Excute(string input)
+        public string Excute(InputArgs input)
         {
             return "readcard";
         }
