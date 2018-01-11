@@ -22,7 +22,7 @@ namespace TechSvr.Plugin.DelphiPrint
             {
                 string dllname = "com_PrintReport";
                 string inputContext = input.Data;
-                string filepathdel = Path.Combine(Directory.GetCurrentDirectory(), @"Plugins\DelphiPrint\");
+                string filepathdel = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "DelphiPrint");
                 IntPtr filepathdelptr = Marshal.StringToHGlobalAnsi(filepathdel);
                 IntPtr dllnameptr = Marshal.StringToHGlobalAnsi(dllname);
                 IntPtr inputcontentptr = Marshal.StringToHGlobalAnsi(inputContext);
