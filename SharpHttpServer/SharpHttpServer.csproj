@@ -46,5 +46,11 @@
     <Compile Include="RequestHandlerRegistrator.cs" />
     <Compile Include="Router.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TechSvr.Utils\TechSvr.Utils.csproj">
+      <Project>{b95275f7-2467-4080-924f-f509d0de0125}</Project>
+      <Name>TechSvr.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

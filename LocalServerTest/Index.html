@@ -32,20 +32,20 @@
                         <tr>
                             <td>
 
-                                <input class="requestFunc" name="requestFunc" id="requestFunc" type='radio' checked="checked" value="msgtype=Computer&infname=Com_HostInfo&inftype=Delphi&validateid=uey943" />
+                                <input class="requestFunc" name="requestFunc" id="requestFunc" type='radio' checked="checked" value="Computer" />
                                 <label for="requestFunc">获取计算机信息</label>
                             </td>
                             <td>
-                                <input class="requestFunc" name="requestFunc" id="requestFunc1" type="radio" value="msgtype=print&infname=com_PrintReport&inftype=Delphi&validateid=&Systype=ty" />
+                                <input class="requestFunc" name="requestFunc" id="requestFunc1" type="radio" value="print" />
                                 <label for="requestFunc1">Fast打印</label>
                             </td>
                             <td>
-                                <input class="requestFunc" name="requestFunc" id="requestFunc3" type="radio" value="msgtype=delphiprint&infname=com_PrintReport&inftype=Delphi&validateid=" />
+                                <input class="requestFunc" name="requestFunc" id="requestFunc3" type="radio" value="delphiprint" />
                                 <label for="requestFunc3">delphi打印</label>
                             </td>
                             <td>
 
-                                <input class="requestFunc" name="requestFunc" id="requestFunc2" type="radio" value="msgtype=readcard&infname=ReadCard.dll&inftype=csharp&validateid=uey94379230" />
+                                <input class="requestFunc" name="requestFunc" id="requestFunc2" type="radio" value="readcard" />
                                 <label for="requestFunc2">读卡</label>
                             </td>
                         </tr>
@@ -60,6 +60,66 @@
              </textarea>
                     <textarea id='txtdelphiprintvalue' style="display:none;">
                     <?xml version="1.0" standalone="yes" ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -93,6 +153,7 @@
     var j = {
     "TEMPLATE": "report.frx",
     "PRINTMODE": "1",
+    "SysType":"ty",
     "DATA": {
     "MAINDATA": [
     {
@@ -285,18 +346,29 @@
     var method = $("input[name='requestMethod']:checked").val();
     var requestFunc = $("input[class='requestFunc']:checked").val();
     var params = $('#txtparam').val();
-    var url = $('#txtUrl').val() + '?' + requestFunc;
+    var url = $('#txtUrl').val();
     if (method === 'GET') params = null;
+
+
+    var postdata={
+    msgtype:requestFunc,
+    infname:"",
+    inftype:"C#",
+    systype:"LIS",
+    validateid:"XXXXX",
+    data:params
+    };
+
     $.ajax({
     type: method,
     url: url,
-    data: params,
+    datatype:"json",
+    contentType: 'application/json',
+    data:JSON.stringify(postdata),
     success: function (res) {
-    alert(res);
+    alert(res.type);
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
-    alert(textStatus);    alert(errorThrown);
-
     alert('数据请求出错');
     }
     });

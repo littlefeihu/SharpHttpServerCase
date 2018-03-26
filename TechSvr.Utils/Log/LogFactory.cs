@@ -10,16 +10,16 @@ namespace TechSvr.Utils
     {
         static LogFactory()
         {
-            FileInfo configFile = new FileInfo("log4net.config");
-            log4net.Config.XmlConfigurator.Configure(configFile);
+
         }
-        public static Log GetLogger(Type type)
+
+        public static Log GetLogger(string filename = "Log")
         {
-            return new Log(LogManager.GetLogger(type));
+            ILog logger = CustomRollingFileLogger.GetCustomLogger(filename, DateTime.Now.ToString("yyyyMMdd"));
+
+            return new Log(logger);
         }
-        public static Log GetLogger(string str)
-        {
-            return new Log(LogManager.GetLogger(str));
-        }
+
+
     }
 }

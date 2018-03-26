@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TechSvr.Utils.DTO;
 
 namespace TechSvr.Utils
 {
@@ -12,7 +13,7 @@ namespace TechSvr.Utils
         /// </summary>
         /// <param name="input">入参为string类型，格式为：XML或JSON</param>
         /// <returns></returns>
-        string Excute(InputArgs input);
+        ResposeMessage Excute(InputArgs input);
 
         string Name { get; }
     }

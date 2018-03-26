@@ -40,10 +40,10 @@
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.logControl1 = new TechSvr.Controls.LogControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblServiceStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.logControl1 = new TechSvr.Controls.LogControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -135,13 +135,6 @@
             this.tabPage2.Text = "日志跟踪";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // logControl1
-            // 
-            this.logControl1.Location = new System.Drawing.Point(0, 0);
-            this.logControl1.Name = "logControl1";
-            this.logControl1.Size = new System.Drawing.Size(553, 403);
-            this.logControl1.TabIndex = 0;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -165,6 +158,13 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // logControl1
+            // 
+            this.logControl1.Location = new System.Drawing.Point(0, 0);
+            this.logControl1.Name = "logControl1";
+            this.logControl1.Size = new System.Drawing.Size(553, 403);
+            this.logControl1.TabIndex = 0;
+            // 
             // TechSvrForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -177,7 +177,6 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TechSvrForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TechSvr";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TechSvrForm_FormClosed);
             this.menuStrip1.ResumeLayout(false);

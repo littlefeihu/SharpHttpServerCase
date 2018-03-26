@@ -1,14 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="06/20/2009 22:40:42" ReportInfo.Modified="12/28/2017 16:28:52" ReportInfo.CreatorVersion="2014.2.3.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/03/2018 16:49:17" ReportInfo.Modified="01/13/2018 16:04:07" ReportInfo.CreatorVersion="2014.2.3.0">
+  <Dictionary>
+    <TableDataSource Name="mainDataTable" ReferenceName="Data.mainDataTable" DataType="System.Int32" Enabled="true">
+      <Column Name="SUBSYSCODE" DataType="System.String"/>
+      <Column Name="CLASSCODE" DataType="System.String"/>
+      <Column Name="SLAVENO" DataType="System.String"/>
+      <Column Name="SLAVENAME" DataType="System.String"/>
+      <Column Name="REMARK" DataType="System.String"/>
+      <Column Name="EXTERNCODE" DataType="System.String"/>
+      <Column Name="ORDERNO" DataType="System.String"/>
+      <Column Name="MEMCODE1" DataType="System.String"/>
+      <Column Name="MEMCODE2" DataType="System.String"/>
+      <Column Name="SLAVENUM" DataType="System.String"/>
+      <Column Name="VISIBLE" DataType="System.String"/>
+      <Column Name="SYSFLAG" DataType="System.String"/>
+      <Column Name="STOPFLAG" DataType="System.String"/>
+      <Column Name="GROUPCODE" DataType="System.String"/>
+      <Column Name="GROUPCODE1" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="subDataTable" ReferenceName="Data.subDataTable" DataType="System.Int32" Enabled="true">
+      <Column Name="SUBSYSCODE" DataType="System.String"/>
+      <Column Name="CLASSCODE" DataType="System.String"/>
+      <Column Name="SLAVENO" DataType="System.String"/>
+      <Column Name="SLAVENAME" DataType="System.String"/>
+      <Column Name="REMARK" DataType="System.String"/>
+      <Column Name="EXTERNCODE" DataType="System.String"/>
+      <Column Name="ORDERNO" DataType="System.String"/>
+      <Column Name="MEMCODE1" DataType="System.String"/>
+      <Column Name="MEMCODE2" DataType="System.String"/>
+      <Column Name="SLAVENUM" DataType="System.String"/>
+      <Column Name="VISIBLE" DataType="System.String"/>
+      <Column Name="SYSFLAG" DataType="System.String"/>
+      <Column Name="STOPFLAG" DataType="System.String"/>
+      <Column Name="GROUPCODE" DataType="System.String"/>
+      <Column Name="GROUPCODE1" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
   <ReportPage Name="Page1">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
-      <TextObject Name="Text5" Width="718.2" Height="28.35" Text="EMPLOYEES" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text1" Left="245.7" Top="9.45" Width="217.35" Height="18.9" Text="XXXX医院_辅助字典" Font="仿宋, 10.5pt, style=Bold"/>
     </ReportTitleBand>
-    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35">
-      <TextObject Name="Text2" Width="94.5" Height="18.9" Text="[mainDataTable.SUBSYSCODE]" Font="Arial, 10pt, style=Bold"/>
-      <TextObject Name="Text4" Left="103.95" Width="94.5" Height="18.9" Text="[mainDataTable.CLASSCODE]" Font="Arial, 10pt, style=Bold"/>
-      <TextObject Name="Text1" Left="207.9" Width="179.55" Height="18.9" Text="[mainDataTable.SLAVENAME]" Font="宋体, 9pt"/>
+    <PageHeaderBand Name="PageHeader1" Top="41.11" Width="718.2" Height="28.35" Guides="9.45">
+      <TextObject Name="Text4" Left="129.45" Width="94.5" Height="18.9" Text="字典分类" Font="宋体, 10.5pt, style=Bold"/>
+      <TextObject Name="Text6" Left="241.85" Width="94.5" Height="18.9" Text="字典代码" Font="宋体, 10.5pt, style=Bold"/>
+      <TextObject Name="Text8" Left="374.15" Width="94.5" Height="18.9" Text="字典名称" Font="宋体, 10.5pt, style=Bold"/>
+      <TextObject Name="Text10" Left="487.55" Width="94.5" Height="18.9" Text="备注" Font="宋体, 10.5pt, style=Bold"/>
+      <TextObject Name="Text12" Left="592.5" Width="85.05" Height="18.9" Text="分类" Font="宋体, 10.5pt, style=Bold"/>
+      <LineObject Name="Line1" Left="100.1" Top="18.9" Width="542.65"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="74.15" Width="718.2" Height="18.9"/>
+    <DataBand Name="Data1" Top="72.76" Width="718.2" Height="28.35" DataSource="mainDataTable">
+      <TextObject Name="Text3" Left="124.45" Top="4.45" Width="94.5" Height="18.9" Text="[mainDataTable.CLASSCODE]" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="237.85" Top="4.45" Width="94.5" Height="18.9" Text="[mainDataTable.SLAVENO]" Font="宋体, 9pt"/>
+      <TextObject Name="Text7" Left="370.15" Top="4.45" Width="94.5" Height="18.9" Text="[mainDataTable.SLAVENAME]" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="483.55" Top="4.45" Width="94.5" Height="18.9" Text="[mainDataTable.REMARK]" Font="宋体, 9pt"/>
+      <TextObject Name="Text11" Left="587.5" Top="4.45" Width="85.05" Height="18.9" Text="[mainDataTable.GROUPCODE]" Font="宋体, 9pt"/>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="104.42" Width="718.2" Height="37.8"/>
+    <PageFooterBand Name="PageFooter1" Top="145.52" Width="718.2" Height="18.9">
+      <LineObject Name="Line2" Left="100.95" Top="9.45" Width="542.65"/>
+    </PageFooterBand>
   </ReportPage>
 </Report>

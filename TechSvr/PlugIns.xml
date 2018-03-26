@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PlugIns>
+  <PlugIn Name="TechSvr.Plugin.CTest.dll" CurrentVersion="1.0.0.0" >
+    
+  </PlugIn>
+  <PlugIn Name="TechSvr.Plugin.DelphiPrint.dll" CurrentVersion="1.0.0.0" ></PlugIn>
+  <PlugIn Name="TechSvr.Plugin.GetMachineInfo.dll" CurrentVersion="1.0.0.0" ></PlugIn>
+  <PlugIn Name="TechSvr.Plugin.Print.dll" CurrentVersion="1.0.0.0" ></PlugIn>
+  <PlugIn Name="TechSvr.Plugin.ReadCard.dll" CurrentVersion="1.0.0.0" ></PlugIn>
+</PlugIns>

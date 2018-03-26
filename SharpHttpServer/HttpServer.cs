@@ -5,7 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
-
+using System.Web;
+using TechSvr.Utils.DTO;
+using TechSvr.Utils;
 namespace SharpHttpServer.Net.Http
 {
     public class HttpServer : IDisposable
@@ -17,9 +19,9 @@ namespace SharpHttpServer.Net.Http
 
         private int port;
 
-        public string Hostname { get; set; } = "localhost";
+        public string Hostname { get; set; }
 
-        public string Scheme { get; set; } = "http";
+        public string Scheme { get; set; }
 
         public bool IsStarted
         {
@@ -49,11 +51,13 @@ namespace SharpHttpServer.Net.Http
         public HttpServer(int port)
         {
             if (!HttpListener.IsSupported)
-                throw new NotSupportedException("Needs Windows XP SP2, Server 2003 or later.");
+                throw new NotSupportedException("HttpListener Is Not Supported");
 
             router = new Router();
 
             this.port = port;
+            this.Hostname = "localhost";
+            this.Scheme = "http";
         }
 
 
@@ -68,24 +72,32 @@ namespace SharpHttpServer.Net.Http
 
         public void Run()
         {
-            listener = new HttpListener();
-            router.GetAllRoutes()
-                .ToList()
-                .ForEach(path =>
-                {
-                    string query = "";
-                    if (path.Contains("?"))
+            try
+            {
+                listener = new HttpListener();
+                router.GetAllRoutes()
+                    .ToList()
+                    .ForEach(path =>
                     {
-                        query = path.Substring(path.IndexOf("?") + 1);
-                        path = path.Substring(0, path.IndexOf("?"));
-                    }
-                    if (!path.EndsWith("/"))
-                        path += "/";
-                    listener.Prefixes.Add(BuildUri(path, query));
-                });
+                        string query = "";
+                        if (path.Contains("?"))
+                        {
+                            query = path.Substring(path.IndexOf("?") + 1);
+                            path = path.Substring(0, path.IndexOf("?"));
+                        }
+                        if (!path.EndsWith("/"))
+                            path += "/";
+                        listener.Prefixes.Add(BuildUri(path, query));
+                    });
 
-            listener.Start();
-
+                listener.Start();
+            }
+            catch (Exception ex)
+            {
+                if (StatusChanged != null)
+                    StatusChanged(isStarted, BaseUrl + ",启动服务出错," + ex.Message);
+                return;
+            }
             ThreadPool.QueueUserWorkItem((o) =>
             {
                 IsStarted = true;
@@ -110,17 +122,16 @@ namespace SharpHttpServer.Net.Http
                                 if (CmdErrored != null)
                                     CmdErrored(ex);
 
-                                Respond500(ctx);
-                            } // suppress any exceptions
+                                Respond200(ctx, new ResposeMessage { message = ex.Message, type = ResultType.ERROR.ToString(), data = "", messageCode = MessageCode.error.ToString() }.ToJson());
+                            }
                             finally
                             {
-                                // always close the stream
                                 ctx.Response.OutputStream.Close();
                             }
                         }, listener.GetContext());
                     }
                 }
-                catch { } // suppress any exceptions
+                catch { }
             });
         }
 
@@ -132,9 +143,9 @@ namespace SharpHttpServer.Net.Http
                 listener.Close();
                 IsStarted = false;
             }
-
         }
 
+        #region HttpMethod
         public RequestHandlerRegistrator Get
         {
             get { return router.GetRegistrator(HttpMethod.Get); }
@@ -184,6 +195,8 @@ namespace SharpHttpServer.Net.Http
         {
             router.ServeStatic(directory, path);
         }
+        #endregion
+
 
         private string BuildUri(string path = "", string query = "")
         {
@@ -192,21 +205,17 @@ namespace SharpHttpServer.Net.Http
 
         private void ProcessRequest(HttpListenerContext ctx, Func<HttpListenerRequest, string> handler)
         {
-            try
-            {
-                string response = handler(ctx.Request);
-                Respond200(ctx, response);
-            }
-            catch (Exception)
-            {
-                Respond500(ctx);
-            }
+            string response = handler(ctx.Request);
+            Respond200(ctx, response);
         }
 
         public void Respond200(HttpListenerContext ctx, string content)
         {
             ctx.Response.Headers.Add("Access-Control-Allow-Origin: *");
-            ctx.Response.Headers.Add("Content-type", "text/html;charset=UTF-8");
+            ctx.Response.Headers.Add("Access-Control-Allow-Credentials: true");
+            ctx.Response.Headers.Add("Access-Control-Allow-Methods:GET,POST,OPTIONS,PUT,DELETE");
+            ctx.Response.Headers.Add("Access-Control-Allow-Headers:Content-Type,Access-Token");
+            ctx.Response.Headers.Add("Content-type", "application/json;charset=UTF-8");
             ctx.Response.StatusCode = 200;
             ctx.Response.StatusDescription = "The request was fulfilled.";
             byte[] buf = Encoding.UTF8.GetBytes(content);
@@ -218,15 +227,22 @@ namespace SharpHttpServer.Net.Http
         public void Respond404(HttpListenerContext ctx)
         {
             ctx.Response.Headers.Add("Access-Control-Allow-Origin: *");
-            ctx.Response.Headers.Add("Content-type", "text/html;charset=UTF-8");
+            ctx.Response.Headers.Add("Access-Control-Allow-Methods:GET,POST,OPTIONS,PUT,DELETE");
+            ctx.Response.Headers.Add("Access-Control-Allow-Credentials: true");
+            ctx.Response.Headers.Add("Access-Control-Allow-Headers:Content-Type,Access-Token");
+            ctx.Response.Headers.Add("Content-type", "application/json;charset=UTF-8");
             ctx.Response.StatusCode = 404;
             ctx.Response.StatusDescription = "The server has not found anything matching the URI given.";
         }
 
         public void Respond500(HttpListenerContext ctx)
         {
+
+            ctx.Response.Headers.Add("Access-Control-Allow-Credentials: true");
+            ctx.Response.Headers.Add("Access-Control-Allow-Methods: GET,POST,OPTIONS,PUT,DELETE");
             ctx.Response.Headers.Add("Access-Control-Allow-Origin: *");
-            ctx.Response.Headers.Add("Content-type", "text/html;charset=UTF-8");
+            ctx.Response.Headers.Add("Access-Control-Allow-Headers:Content-Type,Access-Token");
+            ctx.Response.Headers.Add("Content-type", "application/json;charset=UTF-8");
             ctx.Response.StatusCode = 500;
             ctx.Response.StatusDescription = "The server encountered an unexpected condition which prevented it from fulfilling the request.";
 

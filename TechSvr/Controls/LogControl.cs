@@ -15,7 +15,7 @@ namespace TechSvr.Controls
         public LogControl()
         {
             InitializeComponent();
-            TechSvrApplication.Instance.LogOutput += Instance_LogOutput;
+            TechSvrApplication.Instance.OutputLog += Instance_LogOutput;
         }
 
         int logCount = 0;

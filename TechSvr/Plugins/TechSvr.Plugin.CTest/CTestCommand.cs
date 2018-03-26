@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using TechSvr.Utils;
+using TechSvr.Utils.DTO;
 
 namespace TechSvr.Plugin.CTest
 {
@@ -15,28 +16,27 @@ namespace TechSvr.Plugin.CTest
             get { return "CTest"; }
         }
 
-        public string Excute(InputArgs input)
+        public ResposeMessage Excute(InputArgs input)
         {
             string resultmsg = "";
-            try
+
+            string dllname = "com_PrintReport";
+            string inputContext = "";
+            IntPtr filepathptr = Marshal.StringToHGlobalAnsi(Directory.GetCurrentDirectory() + "\\" + "CPPTransferModule");
+            IntPtr dllnameptr = Marshal.StringToHGlobalAnsi(dllname);
+            IntPtr paramptr = Marshal.StringToHGlobalAnsi(inputContext);
+
+            IntPtr resultcontent = DllTransfer.CommonMethodC(filepathptr, dllnameptr, paramptr);
+            string resultstr = Marshal.PtrToStringAnsi(resultcontent);
+
+
+            return new ResposeMessage
             {
-
-                string dllname = "com_PrintReport";
-                string inputContext = "";
-                IntPtr filepathptr = Marshal.StringToHGlobalAnsi(Directory.GetCurrentDirectory() + "\\" + "CPPTransferModule");
-                IntPtr dllnameptr = Marshal.StringToHGlobalAnsi(dllname);
-                IntPtr paramptr = Marshal.StringToHGlobalAnsi(inputContext);
-
-                IntPtr resultcontent = DllTransfer.CommonMethodC(filepathptr, dllnameptr, paramptr);
-                string resultstr = Marshal.PtrToStringAnsi(resultcontent);
-
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-            return resultmsg;
+                type = ResultType.SUCCESS.ToString(),
+                message = resultmsg,
+                messageCode = MessageCode.information.ToString(),
+                data = ""
+            };
         }
     }
 }

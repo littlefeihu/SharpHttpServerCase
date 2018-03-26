@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using TechSvr.Utils;
+using TechSvr.Utils.DTO;
 
 namespace TechSvr.Plugin.DelphiPrint
 {
@@ -15,7 +16,7 @@ namespace TechSvr.Plugin.DelphiPrint
             get { return "DelphiPrint"; }
         }
 
-        public string Excute(InputArgs input)
+        public ResposeMessage Excute(InputArgs input)
         {
             string resultmsg = "";
             try
@@ -35,7 +36,13 @@ namespace TechSvr.Plugin.DelphiPrint
                 Console.WriteLine(ex.ToString());
                 throw;
             }
-            return resultmsg;
+            return new ResposeMessage
+            {
+                type = ResultType.SUCCESS.ToString(),
+                message = resultmsg,
+                messageCode = MessageCode.information.ToString(),
+                data = ""
+            };
         }
     }
 }

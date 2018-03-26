@@ -25,8 +25,18 @@ namespace TechSvr
             InitServer();
             LoadLogControl();
             TechSvrApplication.Instance.SetMainFrm(this);
+
+            StartServer();
         }
 
+
+        private void StartServer()
+        {
+            ThreadPool.QueueUserWorkItem((o) =>
+            {
+                Run();
+            });
+        }
         private void LoadLogControl()
         {
             this.logControl1.AutoScroll = true;
@@ -77,7 +87,6 @@ namespace TechSvr
         }
         public void Stop()
         {
-
             foreach (var server in MyServers)
             {
                 server.Stop();
@@ -86,7 +95,7 @@ namespace TechSvr
         #region 内部事件
         private void MyServer_CmdErrored(Exception ex)
         {
-            TechSvrApplication.Instance.WhiteLog(ex.ToString());
+            TechSvrApplication.Instance.ShowToUI(ex.ToString());
         }
 
         private void TechSvrForm_SizeChanged(object sender, EventArgs e)
@@ -97,6 +106,16 @@ namespace TechSvr
                 this.ShowInTaskbar = false;
             }
         }
+        // 重写OnClosing使点击关闭按键时窗体能够缩进托盘
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+
+            this.ShowInTaskbar = false;
+            this.WindowState = FormWindowState.Minimized;
+            e.Cancel = true;
+        }
+
         private void MyServer_StatusChanged(bool isStarted, string baseUrl)
         {
             string statusChangeText = "";
@@ -119,7 +138,7 @@ namespace TechSvr
                 关闭服务ToolStripMenuItem.Enabled = isStarted;
                 lblServiceStatus.Text = statusChangeText;
             }));
-            TechSvrApplication.Instance.WhiteLog(statusChangeText);
+            TechSvrApplication.Instance.ShowToUI(statusChangeText);
         }
 
 
@@ -226,13 +245,14 @@ namespace TechSvr
             portSettingForm.ShowDialog();
 
 
-            if (originPorts != Ports)
+            //端口增加或减少 都会重新启动服务
+            if (originPorts.Except(Ports).Count() > 0 || Ports.Except(originPorts).Count() > 0)
             {
                 Stop();
 
                 InitServer();
 
-                if (MyServers.Any(o => o.IsStarted))
+                if (!MyServers.Any(o => o.IsStarted))
                 {
                     Run();
                 }

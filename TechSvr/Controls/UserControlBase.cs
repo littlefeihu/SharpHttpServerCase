@@ -17,7 +17,7 @@ namespace TechSvr.Controls
         {
             get
             {
-                return LogFactory.GetLogger(this.GetType());
+                return LogFactory.GetLogger();
             }
         }
     }

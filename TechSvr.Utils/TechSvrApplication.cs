@@ -11,7 +11,7 @@ namespace TechSvr.Utils
     public class TechSvrApplication
     {
         public static TechSvrApplication Instance = new TechSvrApplication();
-        public event Action<string> LogOutput;
+        public event Action<string> OutputLog;
         List<ICommand> Commands = new List<ICommand>();
         private TechSvrApplication()
         {
@@ -32,13 +32,22 @@ namespace TechSvr.Utils
             Commands.AddRange(PlugInLoader.Load());
         }
 
-        public void WhiteLog(string msg, bool showinApp = true)
+
+        public void ShowToUI(string msg, string logname = "Log")
         {
-            LogFactory.GetLogger(this.GetType()).Info(msg);
+            WhiteLog(msg, logname, true);
+        }
+        public void Log(string msg, string logname = "Log")
+        {
+            WhiteLog(msg, logname, false);
+        }
+        private void WhiteLog(string msg, string logname, bool showinApp = true)
+        {
+            LogFactory.GetLogger(logname).Info(msg);
             if (showinApp)
             {
-                if (LogOutput != null)
-                    LogOutput(msg);
+                if (OutputLog != null)
+                    OutputLog(msg);
             }
         }
 
@@ -56,7 +65,7 @@ namespace TechSvr.Utils
                 #region 第一次为找到 尝试重新加载一次插件列表
                 LoadPlugIn();
 
-                cmd = Commands.FirstOrDefault(o => o.Name == msgtype);
+                cmd = Commands.FirstOrDefault(o => o.Name.Equals(msgtype, StringComparison.CurrentCultureIgnoreCase));
                 if (cmd == null)
                 {
                     //仍未找到,则抛出异常

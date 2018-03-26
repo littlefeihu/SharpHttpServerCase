@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
-
+using TechSvr.Utils;
 namespace TechSvr.Utils
 {
     public class RequestDataProvider
@@ -27,7 +27,7 @@ namespace TechSvr.Utils
                 using (System.IO.Stream body = _request.InputStream)
                 {
                     System.Text.Encoding encoding = _request.ContentEncoding;
-                    using (System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding))
+                    using (System.IO.StreamReader reader = new System.IO.StreamReader(body, System.Text.Encoding.UTF8))
                     {
                         var postBodytr = reader.ReadToEnd();
                         paraments.Add(Constants.PostBody_Data, postBodytr);
@@ -48,18 +48,18 @@ namespace TechSvr.Utils
         public InputArgs BuildInputArgs()
         {
             var parameters = GetParams();
-            var msgtype = parameters.Get(Constants.QueryString_MsgType);
-            var infname = parameters.Get(Constants.QueryString_InfName);
-            var inftype = parameters.Get(Constants.QueryString_InfType);
-            var validateid = parameters.Get(Constants.QueryString_ValidateId);
-            var data = parameters.Get(Constants.QueryString_Data);
-            var systype = parameters.Get(Constants.QueryString_SysType);
             var postBody = parameters.Get(Constants.PostBody_Data);
+            var postParameters = HttpUtility.ParseQueryString(postBody);
+            var msgtype = postParameters.Get(Constants.QueryString_MsgType);
+            var infname = postParameters.Get(Constants.QueryString_InfName);
+            var inftype = postParameters.Get(Constants.QueryString_InfType);
+            var validateid = postParameters.Get(Constants.QueryString_ValidateId);
+            var data = postParameters.Get(Constants.QueryString_Data);
+            var systype = postParameters.Get(Constants.QueryString_SysType);
 
-            //查询字符串中取不到值 则尝试从RequestBody中获取数据
-            if (string.IsNullOrEmpty(data))
-            {
-                data = postBody;
+            if (string.IsNullOrEmpty(msgtype))
+            {//如果msgtype不包含值，则尝试反序列化json字符串
+                return postBody.ToObject<InputArgs>();
             }
             return InputArgs.Create(postBody, msgtype, infname, inftype, validateid, data, systype);
 

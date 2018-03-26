@@ -9,6 +9,8 @@ namespace TechSvr.Utils
     {
         Preview = 0,
         Design = 1,
-        Print = 2
+        Print = 2,
+        ExportPDF = 3,
+        BatchPrint = 4
     }
 }

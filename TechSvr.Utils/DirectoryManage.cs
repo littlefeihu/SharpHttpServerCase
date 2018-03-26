@@ -34,5 +34,27 @@ namespace TechSvr.Utils
 
             return Path.Combine(dir, frxName);
         }
+
+        /// <summary>
+        /// 根据SysType获取文件路径
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="SysType"></param>
+        /// <returns></returns>
+        public static string GetFullPath(string fileName, string SysType)
+        {
+            var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Plugins\FastPrint");
+            if (!string.IsNullOrEmpty(SysType))
+            {
+                dir = Path.Combine(dir, SysType, "Template");
+            }
+
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            return Path.Combine(dir, fileName);
+        }
     }
 }

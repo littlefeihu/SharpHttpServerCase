@@ -4,6 +4,7 @@ using System.Linq;
 using System.Management;
 using System.Net;
 using System.Text;
+using System.Net.Sockets;
 
 namespace TechSvr.Plugin.GetMachineInfo
 {
@@ -18,6 +19,16 @@ namespace TechSvr.Plugin.GetMachineInfo
             string ip = "";
             string strHostName = Dns.GetHostName(); //得到本机的主机名  
             IPHostEntry ipEntry = Dns.GetHostEntry(strHostName); //取得本机IP  
+            for (int i = 0; i < ipEntry.AddressList.Length; i++)
+            {
+                //从IP地址列表中筛选出IPv4类型的IP地址
+                //AddressFamily.InterNetwork表示此IP为IPv4,
+                //AddressFamily.InterNetworkV6表示此地址为IPv6类型
+                if (ipEntry.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ipEntry.AddressList[i].ToString();
+                }
+            }
             if (ipEntry.AddressList.Length > 0)
             {
                 ip = ipEntry.AddressList[1].ToString();

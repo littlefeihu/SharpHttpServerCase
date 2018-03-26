@@ -15,9 +15,13 @@ namespace TechSvr
             : base(port)
         {
             Get["/"] = _ => "你好,服务正在运行";
+            Get["/api/ping"] = CommandDispatcher.CheckDispatch;
 
-            Get["/api/command"] = CommandDispatcher.Dispatch;
-            Post["/api/command"] = CommandDispatcher.Dispatch;
+            var urlPath = "/api/command";
+
+            Get[urlPath] = Post[urlPath] = Delete[urlPath] = Put[urlPath] = CommandDispatcher.Dispatch;
+
+            Options[urlPath] = Connect[urlPath] = Patch[urlPath] = Head[urlPath] = Trace[urlPath] = CommandDispatcher.CheckDispatch;
         }
 
     }
