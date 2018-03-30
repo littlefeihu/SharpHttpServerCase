@@ -106,6 +106,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoUpdater\AutoUpdater.csproj">
+      <Project>{fb9e7e6b-b19f-4f37-a708-2996190cef13}</Project>
+      <Name>AutoUpdater</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpHttpServer\SharpHttpServer.csproj">
       <Project>{28183cb5-4ae9-4beb-a71c-a698e59f0217}</Project>
       <Name>SharpHttpServer</Name>
@@ -136,7 +140,7 @@
       <Link>Lib\CSharpTransfer.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="PlugIns.xml">
+    <Content Include="TechManifest.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="wn.ico">

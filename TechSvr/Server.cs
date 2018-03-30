@@ -14,7 +14,7 @@ namespace TechSvr
         public Server(int port)
             : base(port)
         {
-            Get["/"] = _ => "你好,服务正在运行";
+            Get["/"] = CommandDispatcher.CheckDispatch;
             Get["/api/ping"] = CommandDispatcher.CheckDispatch;
 
             var urlPath = "/api/command";

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using TechSvr.Utils;
 using TechSvr.Utils.DTO;
@@ -13,24 +15,36 @@ namespace TechSvr.Plugin.ReadCard
 
         public ResposeMessage Excute(InputArgs input)
         {
-            return new ResposeMessage
-            {
-                type = ResultType.SUCCESS.ToString(),
-                message = "读卡",
-                messageCode = MessageCode.information.ToString(),
-                data = new
-                {
-                    CardType = "0 ",
-                    PatName = "张三",
-                    Age = "27",
-                    Sex = "女",
-                    BirthDay = "1990-01-01",
-                    Nation = "汉",
-                    IdNum = "222222222222222222",
-                    Address = "合肥蜀山区长江西路23楼卫宁健康"
-                }
 
-            };
+            string resultmsg = "";
+            try
+            {
+                string dllname = "Lis_ReadICCard";
+                string inputContext = input.Data;
+                string filepathdel = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "ReadCard");
+                IntPtr filepathdelptr = Marshal.StringToHGlobalAnsi(filepathdel);
+                IntPtr dllnameptr = Marshal.StringToHGlobalAnsi(dllname);
+                IntPtr inputcontentptr = Marshal.StringToHGlobalAnsi(inputContext);
+
+                IntPtr resultptr = DllTransfer.CommonMethodD(filepathdelptr, dllnameptr, inputcontentptr);
+                resultmsg = Marshal.PtrToStringAnsi(resultptr);
+
+                var pationt = resultmsg.ToObject<Patient>();
+                return new ResposeMessage
+                {
+                    type = ResultType.SUCCESS.ToString(),
+                    message = resultmsg,
+                    messageCode = MessageCode.information.ToString(),
+                    data = pationt
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw;
+            }
+
+
         }
     }
 }

@@ -37,5 +37,11 @@ namespace TechSvr.Utils
 
         public const string MainDataTable = "mainDataTable";
         public const string SubDataTable = "subDataTable";
+        public const string AutoCheckUpdateInterval = "autocheckupdateinterval";
+        public const string CheckUpdateUrl = "checkupdateurl";
+
+
+
+
     }
 }

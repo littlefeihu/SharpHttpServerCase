@@ -25,6 +25,11 @@ namespace TechSvr.Utils
         [JsonProperty("systype")]
         public string SysType { get; private set; }
 
+        public void SetPostBody(string postbody)
+        {
+            PostBody = postbody;
+        }
+
         public static InputArgs Create(string postBody, string msgType, string infName, string infType, string validateId, string data, string sysType)
         {
 

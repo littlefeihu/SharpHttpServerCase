@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoUpdaterDotNET;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,7 @@ namespace TechSvr
     {
         private ContextMenu notifyiconMnu;
         private List<Server> MyServers = new List<Server>();
+        System.Timers.Timer timer = null;
         public TechSvrForm(string[] args)
         {
             InitializeComponent();
@@ -27,9 +29,31 @@ namespace TechSvr
             TechSvrApplication.Instance.SetMainFrm(this);
 
             StartServer();
+            CheckUpdate();
+            AutoUpdater.UpdateChanged += (isUpdateAvailable) =>
+            {
+                if (!isUpdateAvailable)
+                {
+                    MessageBox.Show("已经是最新版本");
+                }
+            };   
         }
+        private void CheckUpdate()
+        {
+            AutoUpdater.Mandatory = true;
 
-
+            var minutes = int.Parse(System.Configuration.ConfigurationManager.AppSettings[Constants.AutoCheckUpdateInterval].ToString());
+            timer = new System.Timers.Timer
+            {
+                Interval = minutes * 60 * 1000,
+                SynchronizingObject = this
+            };
+            timer.Elapsed += delegate
+            {
+                AutoUpdater.Start(System.Configuration.ConfigurationManager.AppSettings[Constants.CheckUpdateUrl].ToString());
+            };
+            timer.Start();
+        }
         private void StartServer()
         {
             ThreadPool.QueueUserWorkItem((o) =>
@@ -270,6 +294,13 @@ namespace TechSvr
         {
             var outputRecordCountForm = new OutputRecordCountForm(TechSvrApplication.Instance.MaxRecordCount);
             outputRecordCountForm.ShowDialog();
+        }
+
+        private void 检查更新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            AutoUpdater.Start(System.Configuration.ConfigurationManager.AppSettings["checkupdateurl"].ToString());
+
         }
     }
 }

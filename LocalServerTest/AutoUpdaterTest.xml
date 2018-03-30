@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<item>
+  <version>4.0.0.0</version>
+  <url>http://localhost:14986/AutoUpdaterTest.zip</url>
+  <changelog></changelog>
+  <mandatory>true</mandatory>
+  <restart>true</restart>
+</item>

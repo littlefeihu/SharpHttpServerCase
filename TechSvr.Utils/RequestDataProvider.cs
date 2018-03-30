@@ -59,7 +59,9 @@ namespace TechSvr.Utils
 
             if (string.IsNullOrEmpty(msgtype))
             {//如果msgtype不包含值，则尝试反序列化json字符串
-                return postBody.ToObject<InputArgs>();
+                var input = postBody.ToObject<InputArgs>();
+                input.SetPostBody(postBody);
+                return input;
             }
             return InputArgs.Create(postBody, msgtype, infname, inftype, validateid, data, systype);
 
