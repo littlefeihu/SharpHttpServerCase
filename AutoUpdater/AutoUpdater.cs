@@ -176,6 +176,8 @@ namespace AutoUpdaterDotNET
                 _remindLaterTimer.Close();
                 _remindLaterTimer = null;
             }
+
+
             if (!Running && _remindLaterTimer == null)
             {
                 Running = true;

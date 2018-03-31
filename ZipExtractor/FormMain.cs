@@ -13,7 +13,7 @@ namespace ZipExtractor
     public partial class FormMain : Form
     {
         private BackgroundWorker _backgroundWorker;
-        static EventWaitHandle autoUpdateHappenedEvent = EventWaitHandle.OpenExisting("AutoUpdateHappened");
+        static EventWaitHandle autoUpdateHappenedEvent = EventWaitHandle.OpenExisting("E8794D2D446C430DAF584BD989BCB6BFAutoUpdateHappened");
 
         public FormMain()
         {

@@ -8,7 +8,7 @@ namespace TechSvr.Utils
 {
     public class AutoUpdateMonitor
     {
-        static EventWaitHandle evh = new EventWaitHandle(false, 0, "AutoUpdateHappened");
+        static EventWaitHandle evh = new EventWaitHandle(false, 0, "E8794D2D446C430DAF584BD989BCB6BFAutoUpdateHappened");
         static Thread updateMonitorThread;
         public static Action AutoUpdateHappened;
         /// <summary>
