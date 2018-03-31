@@ -5,12 +5,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AutoUpdater.NET")]
-[assembly: AssemblyDescription("AutoUpdater.NET is a class library that allows .NET developers to easily add auto update functionality to their classic desktop application projects.")]
+[assembly: AssemblyTitle("AutoUpdater")]
+[assembly: AssemblyDescription("自动升级插件")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("RBSoft")]
-[assembly: AssemblyProduct("AutoUpdater.NET")]
-[assembly: AssemblyCopyright("Copyright © 2012-2018 RBSoft")]
+[assembly: AssemblyProduct("AutoUpdater")]
+[assembly: AssemblyCopyright("Copyright © 2012-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

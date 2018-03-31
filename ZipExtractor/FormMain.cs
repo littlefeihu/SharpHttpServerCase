@@ -14,7 +14,6 @@ namespace ZipExtractor
     {
         private BackgroundWorker _backgroundWorker;
         static EventWaitHandle autoUpdateHappenedEvent = EventWaitHandle.OpenExisting("E8794D2D446C430DAF584BD989BCB6BFAutoUpdateHappened");
-
         public FormMain()
         {
             InitializeComponent();
@@ -61,6 +60,7 @@ namespace ZipExtractor
                 {
                     try
                     {
+                        labelInformation.Text = @"开始备份程序文件...";
                         var path = Path.GetDirectoryName(main_exeFullName);
 
                         #region 更新之前备份TechSVR的程序文件
@@ -88,7 +88,7 @@ namespace ZipExtractor
 
 
                         var isContainDll = false;
-
+                        labelInformation.Text = @"开始安装升级程序包...";
                         #region 解压升级包到主程序的安装目录
                         // Open an existing zip file for reading.
                         using (ZipStorer zip = ZipStorer.Open(tempDirectory, FileAccess.Read))
@@ -122,6 +122,7 @@ namespace ZipExtractor
                     }
                     catch (Exception ex)
                     {
+                        labelInformation.Text = @"安装升级程序包出错...";
                         MessageBox.Show("安装出错," + ex.ToString());
                     }
                 };
@@ -159,6 +160,7 @@ namespace ZipExtractor
                 };
                 _backgroundWorker.RunWorkerAsync();
             }
+            labelInformation.Text = @"参数不正确...";
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
