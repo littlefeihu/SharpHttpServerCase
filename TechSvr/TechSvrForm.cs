@@ -36,8 +36,9 @@ namespace TechSvr
                 {
                     MessageBox.Show("已经是最新版本");
                 }
-            };   
+            };
         }
+
         private void CheckUpdate()
         {
             AutoUpdater.Mandatory = true;
@@ -285,10 +286,6 @@ namespace TechSvr
         }
 
 
-        private void TechSvrForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Stop();
-        }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {

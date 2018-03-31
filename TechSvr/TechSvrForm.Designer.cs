@@ -38,14 +38,15 @@
             this.启动服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.检查更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblServiceStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.意见反馈ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logControl1 = new TechSvr.Controls.LogControl();
-            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.检查更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -78,28 +79,28 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItem3.Text = "设置日志记录";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItem2.Text = "设置端口";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // 清空日志ToolStripMenuItem
             // 
             this.清空日志ToolStripMenuItem.Name = "清空日志ToolStripMenuItem";
-            this.清空日志ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清空日志ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.清空日志ToolStripMenuItem.Text = "清空日志";
             this.清空日志ToolStripMenuItem.Click += new System.EventHandler(this.清空日志ToolStripMenuItem_Click);
             // 
             // 启动服务ToolStripMenuItem
             // 
             this.启动服务ToolStripMenuItem.Name = "启动服务ToolStripMenuItem";
-            this.启动服务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.启动服务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.启动服务ToolStripMenuItem.Text = "启动服务";
             this.启动服务ToolStripMenuItem.Click += new System.EventHandler(this.启动服务ToolStripMenuItem_Click);
             // 
@@ -107,16 +108,32 @@
             // 
             this.关闭服务ToolStripMenuItem.Enabled = false;
             this.关闭服务ToolStripMenuItem.Name = "关闭服务ToolStripMenuItem";
-            this.关闭服务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.关闭服务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.关闭服务ToolStripMenuItem.Text = "关闭服务";
             this.关闭服务ToolStripMenuItem.Click += new System.EventHandler(this.关闭服务ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
+            // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.检查更新ToolStripMenuItem,
+            this.意见反馈ToolStripMenuItem});
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.帮助ToolStripMenuItem.Text = "帮助";
+            // 
+            // 检查更新ToolStripMenuItem
+            // 
+            this.检查更新ToolStripMenuItem.Name = "检查更新ToolStripMenuItem";
+            this.检查更新ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.检查更新ToolStripMenuItem.Text = "检查更新";
+            this.检查更新ToolStripMenuItem.Click += new System.EventHandler(this.检查更新ToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -161,27 +178,18 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // 意见反馈ToolStripMenuItem
+            // 
+            this.意见反馈ToolStripMenuItem.Name = "意见反馈ToolStripMenuItem";
+            this.意见反馈ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.意见反馈ToolStripMenuItem.Text = "意见反馈";
+            // 
             // logControl1
             // 
             this.logControl1.Location = new System.Drawing.Point(0, 0);
             this.logControl1.Name = "logControl1";
             this.logControl1.Size = new System.Drawing.Size(553, 403);
             this.logControl1.TabIndex = 0;
-            // 
-            // 帮助ToolStripMenuItem
-            // 
-            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.检查更新ToolStripMenuItem});
-            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.帮助ToolStripMenuItem.Text = "帮助";
-            // 
-            // 检查更新ToolStripMenuItem
-            // 
-            this.检查更新ToolStripMenuItem.Name = "检查更新ToolStripMenuItem";
-            this.检查更新ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.检查更新ToolStripMenuItem.Text = "检查更新";
-            this.检查更新ToolStripMenuItem.Click += new System.EventHandler(this.检查更新ToolStripMenuItem_Click);
             // 
             // TechSvrForm
             // 
@@ -196,7 +204,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TechSvrForm";
             this.Text = "TechSvr";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TechSvrForm_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -225,6 +232,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 检查更新ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 意见反馈ToolStripMenuItem;
     }
 }
 

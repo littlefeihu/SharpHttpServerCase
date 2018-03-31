@@ -36,7 +36,7 @@ namespace TechSvr
                 TechSvrApplication.Instance.StartUp();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-              
+
                 _appLibsDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Lib\");
 
                 AddEnvironmentPaths(_appLibsDir);

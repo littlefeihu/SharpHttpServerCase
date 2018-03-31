@@ -15,9 +15,6 @@ using Microsoft.Win32;
 
 namespace AutoUpdaterDotNET
 {
-    /// <summary>
-    ///     Main class that lets you auto update applications by setting some static fields and executing its Start method.
-    /// </summary>
     public static class AutoUpdater
     {
 
@@ -54,40 +51,42 @@ namespace AutoUpdaterDotNET
 
 
         #region 公共属性
+        /// <summary>
+        /// 检查服务端是否有更新之后，触发该事件
+        /// </summary>
         public static Action<bool> UpdateChanged;
         /// <summary>
-        ///     Set it to folder path where you want to download the update file. If not provided then it defaults to Temp folder.
+        ///   下载路径
         /// </summary>
         public static String DownloadPath;
 
         /// <summary>
-        ///     Set the Application Title shown in Update dialog. Although AutoUpdater.NET will get it automatically, you can set this property if you like to give custom Title.
+        ///  主程序标题
         /// </summary>
         public static String AppTitle;
 
         /// <summary>
-        ///     URL of the xml file that contains information about latest version of the application.
+        ///   XML地址
         /// </summary>
         public static String AppCastURL;
 
         /// <summary>
-        ///     Opens the download url in default browser if true. Very usefull if you have portable application.
+        ///   是否打开下载页面
         /// </summary>
         public static bool OpenDownloadPage;
 
         /// <summary>
-        ///     If this is true users can see the skip button.
+        ///   显示跳过按钮
         /// </summary>
         public static Boolean ShowSkipButton = true;
 
         /// <summary>
-        ///     If this is true users can see the Remind Later button.
+        ///  显示稍后提醒按钮
         /// </summary>
         public static Boolean ShowRemindLaterButton = true;
 
         /// <summary>
-        ///     If this is true users see dialog where they can set remind later interval otherwise it will take the interval from
-        ///     RemindLaterAt and RemindLaterTimeSpan fields.
+        ///   设置稍后提醒信息
         /// </summary>
         public static Boolean LetUserSelectRemindLater = true;
 
@@ -102,73 +101,73 @@ namespace AutoUpdaterDotNET
         public static bool ReportErrors = false;
 
         /// <summary>
-        ///     Set this to false if your application doesn't need administrator privileges to replace the old version.
+        ///   是否需要管理员权限
         /// </summary>
         public static bool RunUpdateAsAdmin = true;
 
         ///<summary>
-        ///     Set this to true if you want to ignore previously assigned Remind Later and Skip settings. It will also hide Remind Later and Skip buttons.
+        ///   强制更新（不显示UpdateForm更新提醒窗口，直接下载更新包进行更新）
         /// </summary>
         public static bool Mandatory;
 
         /// <summary>
-        ///     Set Proxy server to use for all the web requests in AutoUpdater.NET.
+        /// 网络代理
         /// </summary>
         public static WebProxy Proxy;
 
         /// <summary>
-        ///     Set if RemindLaterAt interval should be in Minutes, Hours or Days.
+        ///   稍后提醒间隔
         /// </summary>
         public static RemindLaterFormat RemindLaterTimeSpan = RemindLaterFormat.Days;
 
         /// <summary>
-        ///     A delegate type to handle how to exit the application after update is downloaded.
+        ///  主程序退出事件
         /// </summary>
         public delegate void ApplicationExitEventHandler();
 
         /// <summary>
-        ///     An event that developers can use to exit the application gracefully.
+        ///   主程序退出事件
         /// </summary>
         public static event ApplicationExitEventHandler ApplicationExitEvent;
 
         /// <summary>
-        ///     A delegate type for hooking up update notifications.
+        ///   检查更新委托
         /// </summary>
-        /// <param name="args">An object containing all the parameters recieved from AppCast XML file. If there will be an error while looking for the XML file then this object will be null.</param>
+        /// <param name="args"></param>
         public delegate void CheckForUpdateEventHandler(UpdateInfoEventArgs args);
 
         /// <summary>
-        ///     An event that clients can use to be notified whenever the update is checked.
+        ///    检查更新事件
         /// </summary>
         public static event CheckForUpdateEventHandler CheckForUpdateEvent;
 
         /// <summary>
-        ///     A delegate type for hooking up parsing logic.
+        /// 服务器XML解析委托
         /// </summary>
-        /// <param name="args">An object containing the AppCast file received from server.</param>
+        /// <param name="args"></param>
         public delegate void ParseUpdateInfoHandler(ParseUpdateInfoEventArgs args);
 
         /// <summary>
-        ///     An event that clients can use to be notified whenever the AppCast file needs parsing.
+        /// 服务器XML解析事件
         /// </summary>
         public static event ParseUpdateInfoHandler ParseUpdateInfoEvent;
 
         #endregion
 
         /// <summary>
-        ///     Start checking for new version of application and display dialog to the user if update is available.
+        /// 开始检查服务端是否有更新可用
         /// </summary>
-        /// <param name="myAssembly">Assembly to use for version checking.</param>
+        /// <param name="myAssembly">当前主程序.</param>
         public static void Start(Assembly myAssembly = null)
         {
             Start(AppCastURL, myAssembly);
         }
 
         /// <summary>
-        /// Start checking for new version of application and display dialog to the user if update is available.
+        ///开始检查服务端是否有更新可用
         /// </summary>
-        /// <param name="appCast">URL of the xml file that contains information about latest version of the application.</param>
-        /// <param name="myAssembly">Assembly to use for version checking.</param>
+        /// <param name="appCast">服务器XML文件路径</param>
+        /// <param name="myAssembly">.</param>
         public static void Start(String appCast, Assembly myAssembly = null)
         {
             if (Mandatory && _remindLaterTimer != null)
@@ -262,12 +261,26 @@ namespace AutoUpdaterDotNET
 
         private static void ShowUpdateForm()
         {
-            var updateForm = new UpdateForm();
-            if (updateForm.ShowDialog().Equals(DialogResult.OK))
+
+            if (Mandatory)
             {
-                if (NeedRestart)
+                if (DownloadUpdate())
                 {
-                    Exit();
+                    if (NeedRestart)
+                    {
+                        Exit();
+                    }
+                }
+            }
+            else
+            {
+                var updateForm = new UpdateForm();
+                if (updateForm.ShowDialog().Equals(DialogResult.OK))
+                {
+                    if (NeedRestart)
+                    {
+                        Exit();
+                    }
                 }
             }
         }
@@ -488,7 +501,7 @@ namespace AutoUpdaterDotNET
         }
 
         /// <summary>
-        /// Detects and exits all instances of running assembly, including current.
+        /// 退出当前主程序
         /// </summary>
         private static void Exit()
         {
@@ -508,29 +521,26 @@ namespace AutoUpdaterDotNET
                     }
                     catch (Win32Exception)
                     {
-                        // Current process should be same as processes created by other instances of the application so it should be able to access modules of other instances. 
-                        // This means this is not the process we are looking for so we can safely skip this.
                         continue;
                     }
 
                     if (process.Id != currentProcess.Id &&
-                        currentProcess.MainModule.FileName == processPath) //get all instances of assembly except current
+                        currentProcess.MainModule.FileName == processPath)
                     {
                         if (process.CloseMainWindow())
                         {
-                            process.WaitForExit((int)TimeSpan.FromSeconds(10).TotalMilliseconds); //give some time to process message
+                            process.WaitForExit((int)TimeSpan.FromSeconds(5).TotalMilliseconds);
                         }
                         if (!process.HasExited)
                         {
-                            process.Kill(); //TODO show UI message asking user to close program himself instead of silently killing it
+                            process.Kill();
                         }
                     }
                 }
 
                 if (IsWinFormsApplication)
                 {
-                    MethodInvoker methodInvoker = Application.Exit;
-                    methodInvoker.Invoke();
+                    Environment.Exit(0);
                 }
 #if NETWPF
                 else if (System.Windows.Application.Current != null)
@@ -584,7 +594,7 @@ namespace AutoUpdaterDotNET
         }
 
         /// <summary>
-        ///     Opens the Download window that download the update and execute the installer when download completes.
+        ///   打开下载窗口，开始下载更新包
         /// </summary>
         public static bool DownloadUpdate()
         {

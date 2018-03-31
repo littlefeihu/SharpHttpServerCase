@@ -13,6 +13,8 @@ namespace TechSvr.Utils
         public static TechSvrApplication Instance = new TechSvrApplication();
         public event Action<string> OutputLog;
         List<ICommand> Commands = new List<ICommand>();
+
+
         private TechSvrApplication()
         {
 
@@ -24,7 +26,14 @@ namespace TechSvr.Utils
         public void StartUp()
         {
             LoadPlugIn();
+
+            AutoUpdateMonitor.AutoUpdateHappened += () =>
+            {
+                LoadPlugIn();
+            };
+            AutoUpdateMonitor.StartMonitor();
         }
+
 
         public void LoadPlugIn()
         {

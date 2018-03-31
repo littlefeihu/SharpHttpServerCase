@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Threading;
 using System.Windows.Forms;
 using ZipExtractor.Properties;
 
@@ -12,6 +13,7 @@ namespace ZipExtractor
     public partial class FormMain : Form
     {
         private BackgroundWorker _backgroundWorker;
+        static EventWaitHandle autoUpdateHappenedEvent = EventWaitHandle.OpenExisting("AutoUpdateHappened");
 
         public FormMain()
         {
@@ -37,7 +39,7 @@ namespace ZipExtractor
                         {
                             if (process.MainModule.FileName.Equals(main_exeFullName))
                             {
-                                labelInformation.Text = @"Waiting for application to Exit...";
+                                labelInformation.Text = @"等待主程序退出...";
                                 process.WaitForExit();
                             }
                         }
@@ -84,6 +86,9 @@ namespace ZipExtractor
                         }
                         #endregion
 
+
+                        var isContainDll = false;
+
                         #region 解压升级包到主程序的安装目录
                         // Open an existing zip file for reading.
                         using (ZipStorer zip = ZipStorer.Open(tempDirectory, FileAccess.Read))
@@ -100,11 +105,20 @@ namespace ZipExtractor
                                     return;
                                 }
                                 ZipStorer.ZipFileEntry entry = dir[index];
-                                zip.ExtractFile(entry, Path.Combine(path, entry.FilenameInZip));
+
+                                var filename = Path.Combine(path, entry.FilenameInZip);
+                                isContainDll = filename.EndsWith(".dll");
+                                zip.ExtractFile(entry, filename);
                                 _backgroundWorker.ReportProgress((index + 1) * 100 / dir.Count, string.Format(Resources.CurrentFileExtracting, entry.FilenameInZip));
                             }
                         }
                         #endregion
+
+                        //如果升级的文件中包含DLL 且没有要求重启主程序，择触发自动升级事件，让程序重新加载插件数据
+                        if (isContainDll && !needRestart)
+                        {
+                            autoUpdateHappenedEvent.Set();
+                        }
                     }
                     catch (Exception ex)
                     {
