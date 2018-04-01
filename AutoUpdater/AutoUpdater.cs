@@ -177,6 +177,12 @@ namespace AutoUpdaterDotNET
                 _remindLaterTimer = null;
             }
 
+            ///检查解压程序是否还在运行当中，如果还在运行，则停止继续检查更新
+            var ZipExtractorArr = Process.GetProcessesByName("ZipExtractor");
+            if (ZipExtractorArr.Length > 0)
+            {
+                return;
+            }
 
             if (!Running && _remindLaterTimer == null)
             {

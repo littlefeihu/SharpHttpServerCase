@@ -63,7 +63,7 @@ namespace TechSvr.Plugin.Print
 
                 if (printMode != FPrintMode.BatchPrint)
                 {
-                    report.RegisterData(BuildDS(jobject));
+                    report.RegisterData(ds);
                     //设置报表显示数据源选项
                     foreach (DataTable dt in ds.Tables)
                     {
